@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* ============================================
+   Design tokens — luxury / cinematic palette
+   Pure black surfaces (BMW/Lotus night mode),
+   a single refined gold accent.
+
+   Fonts: Montserrat (body), Barlow ≈ Lotus (display).
+   (The real BMW/Lotus typefaces are proprietary —
+   to use licensed files later, load them with
+   next/font/local in app/layout.jsx and keep the
+   same CSS variable names.)
+   ============================================ */
+@theme {
+  --color-ink: #000000; /* page background — pure black */
+  --color-charcoal: #050505; /* elevated bands (reads black) */
+  --color-smoke: #1a1a1a; /* borders, dividers */
+  --color-fog: #a1a1aa; /* muted body text on dark */
+  --color-porcelain: #f7f7f5; /* light sections */
+  --color-gold: #c9a24b; /* signature accent */
+  --color-gold-soft: #e6cf94; /* accent hover / gradients */
+
+  --font-sans: var(--font-mont), system-ui, sans-serif;
+  --font-display: var(--font-barlow), system-ui, sans-serif;
+  --font-montserrat: var(--font-mont), system-ui, sans-serif;
+
+  /* Animated accent-glow gradient (ruixen feature section) */
+  --animate-rainbow: rainbow 4s linear infinite;
+  --animate-glow: glow 6s ease-in-out infinite;
+
+  @keyframes rainbow {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 200%;
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+/* Glow palette — gold-tinted HSL components consumed as hsl(var(--color-n))
+   by the ruixen feature section (brand-adapted from the original rainbow). */
+:root {
+  --color-1: 41 54% 54%;
+  --color-2: 43 62% 74%;
+  --color-3: 36 45% 42%;
+  --color-4: 48 70% 82%;
+  --color-5: 41 54% 60%;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink text-porcelain antialiased;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  @apply bg-gold text-ink;
+}
+
+/* Honour the OS motion preference (hero scroll cue, shimmer, reveals). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Utilities ---------- */
+@utility text-balance {
+  text-wrap: balance;
+}
