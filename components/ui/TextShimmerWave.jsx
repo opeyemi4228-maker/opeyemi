@@ -21,7 +21,10 @@ export function TextShimmerWave({
   rotateYDistance = 10,
   transition,
 }) {
-  const MotionComponent = motion.create(Component);
+  // `as` takes an element tag. Reading it off framer-motion's proxy gives a
+  // stable, library-cached component type; `motion.create()` would mint a new
+  // type every render and remount the subtree, restarting the wave.
+  const MotionComponent = motion[Component] ?? motion.p;
 
   return (
     <MotionComponent

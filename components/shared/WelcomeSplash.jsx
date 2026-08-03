@@ -32,6 +32,11 @@ export default function WelcomeSplash() {
     } catch {
       return; // storage unavailable, never nag on every load
     }
+    // Intentional setState-in-effect: the splash is gated on localStorage,
+    // which only exists on the client, so the server must render "hidden" and
+    // the client promotes it after mount. There is no render-time equivalent
+    // that stays hydration-safe.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPhase("showing");
     timers.current = [
       setTimeout(() => setPhase("leaving"), SHOW_MS),

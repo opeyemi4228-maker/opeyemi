@@ -52,11 +52,15 @@ export default function Navbar() {
     };
   }, [open]);
 
-  // Close on navigation. Same-route taps don't change `pathname`, so the
-  // links also call `close()` directly.
-  React.useEffect(() => {
+  // Close on navigation — including back/forward, which never touch the
+  // links' onClick. Adjusting state during render (React's documented
+  // pattern) rather than in an effect avoids a render with the menu still
+  // open over the new route.
+  const [lastPath, setLastPath] = React.useState(pathname);
+  if (lastPath !== pathname) {
+    setLastPath(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   // Close when the viewport crosses into the desktop layout — the panel is
   // `md:hidden`, so leaving it open there would lock scrolling with no menu
@@ -165,10 +169,6 @@ const itemVariants = {
 
 function MobileMenu({ open, pathname, onClose }) {
   const panelRef = React.useRef(null);
-  // Portals need a DOM target, so wait for mount rather than sniffing
-  // `window` mid-render (which desynchronises server and client markup).
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
 
   // Move focus into the panel on open so keyboard and screen-reader users
   // land on the menu instead of the page behind it.
@@ -198,7 +198,9 @@ function MobileMenu({ open, pathname, onClose }) {
     }
   };
 
-  if (!mounted) return null;
+  // No portal target on the server. Hydration stays consistent because the
+  // panel renders nothing while closed, so neither pass emits any DOM.
+  if (typeof document === "undefined") return null;
 
   return createPortal(
     <AnimatePresence>
