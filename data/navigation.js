@@ -1,4 +1,8 @@
-// Primary navigation — shared by Navbar and Footer.
+// Primary navigation, shared by Navbar and Footer.
+//
+// Every href below resolves to a real page. Nothing points at "#": a link
+// that goes nowhere reads as carelessness, and four of them in a footer
+// undermines a site whose entire argument is about standards.
 
 export const navLinks = [
   { label: "About", href: "/about" },
@@ -8,11 +12,12 @@ export const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-// Footer link columns (BMW Group layout).
+// Footer link columns. Each intent gets its own destination rather than
+// funnelling every visitor into the same enquiry form.
 export const footerColumns = [
   {
     heading: "Explore",
-    links: navLinks,
+    links: [...navLinks, { label: "Now", href: "/now" }],
   },
   {
     heading: "Work",
@@ -20,23 +25,24 @@ export const footerColumns = [
       { label: "BitLayerX Technologies", href: "/ventures" },
       { label: "Engineering Practice", href: "/ventures" },
       { label: "Leadership & Mentorship", href: "/ventures" },
-      { label: "Speaking", href: "/contact" },
+      { label: "Speaker Kit", href: "/speaking" },
     ],
   },
   {
     heading: "Connect",
     links: [
       { label: "Get in Touch", href: "/contact" },
-      { label: "Newsletter", href: "/contact" },
-      { label: "Press Enquiries", href: "/contact" },
+      { label: "Book a Talk", href: "/speaking" },
+      { label: "Press & Media", href: "/media" },
+      { label: "Newsletter", href: "/insights#newsletter" },
     ],
   },
 ];
 
-// Bottom legal strip (BMW-style) — point to real pages later.
+// Bottom legal strip. All three are real pages; the sitemap is generated.
 export const legalLinks = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Legal Disclaimer", href: "#" },
-  { label: "Cookies", href: "#" },
-  { label: "Sitemap", href: "#" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Legal Disclaimer", href: "/legal" },
+  { label: "Cookies", href: "/cookies" },
+  { label: "Sitemap", href: "/sitemap.xml" },
 ];

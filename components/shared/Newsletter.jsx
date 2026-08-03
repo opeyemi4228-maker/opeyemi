@@ -20,7 +20,7 @@ export default function Newsletter() {
   };
 
   return (
-    <div className="border-t border-smoke py-16">
+    <div id="newsletter" className="scroll-mt-32 border-t border-smoke py-16">
       <div className="grid items-center gap-8 md:grid-cols-2">
         <div>
           <h2 className="font-display text-2xl text-porcelain md:text-3xl">
