@@ -1,5 +1,6 @@
-// shadcn-style card (JSX port) restyled to the brand language:
-// charcoal surface, smoke border, squared corners.
+// shadcn-style card (JSX port) restyled to the light brand language:
+// paper surface, hairline edge, squared corners so the card reads as a
+// printed panel rather than a widget.
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
@@ -7,7 +8,7 @@ import { cn } from "@/lib/utils";
 const Card = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("border border-smoke bg-charcoal text-porcelain", className)}
+    className={cn("border border-hairline bg-paper text-graphite", className)}
     {...props}
   />
 ));
@@ -26,7 +27,7 @@ const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
   <h3
     ref={ref}
     className={cn(
-      "font-display text-2xl leading-none tracking-tight",
+      "font-display text-2xl leading-none tracking-tight text-ink",
       className
     )}
     {...props}
@@ -35,7 +36,7 @@ const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
 CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-sm text-fog", className)} {...props} />
+  <p ref={ref} className={cn("text-sm text-slate", className)} {...props} />
 ));
 CardDescription.displayName = "CardDescription";
 

@@ -1,15 +1,20 @@
 // Consistent section header used across home + inner pages:
-// small gold eyebrow, large display heading, optional right-aligned link.
+// gold rule and tracked eyebrow, large display heading in ink.
 
 import { cn } from "@/lib/utils";
 
 export default function SectionHeading({ eyebrow, title, className = "" }) {
   return (
-    <div className={cn("mb-16", className)}>
+    <div className={cn("mb-14", className)}>
       {eyebrow && (
-        <p className="text-sm tracking-[0.3em] uppercase text-gold">{eyebrow}</p>
+        <div className="flex items-center gap-4">
+          <span aria-hidden="true" className="h-px w-8 shrink-0 bg-gold-ink" />
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-ink">
+            {eyebrow}
+          </p>
+        </div>
       )}
-      <h2 className="mt-3 max-w-2xl font-display text-4xl text-balance md:text-5xl">
+      <h2 className="mt-5 max-w-3xl font-display text-[2rem] font-semibold leading-[1.05] text-balance text-ink sm:text-4xl md:text-5xl">
         {title}
       </h2>
     </div>

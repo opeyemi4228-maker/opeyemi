@@ -1,26 +1,30 @@
 // Credentials strip. The only place figures appear on the homepage, in one
 // format, each with a line of substantiation underneath so a reader never
 // has to guess what the number counts.
+//
+// Set as a spec sheet rather than four cards: a rule above each figure,
+// nothing boxed. A spec sheet is the right register for claims that are
+// meant to be checked.
 
 import { stats } from "@/data/stats";
 
 export default function Stats() {
   return (
-    <section className="border-y border-smoke bg-charcoal py-16 sm:py-20">
+    <section className="border-y border-hairline bg-alabaster py-16 sm:py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-8 lg:grid-cols-4">
+        <dl className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
-            <div key={stat.label}>
+            <div key={stat.label} className="border-t-2 border-ink pt-6">
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <p className="font-display text-3xl text-gold sm:text-4xl">
+                <p className="numeric font-display text-4xl font-semibold leading-none tracking-[-0.02em] text-ink sm:text-5xl">
                   {stat.value}
-                  {stat.suffix}
+                  <span className="text-gold-ink">{stat.suffix}</span>
                 </p>
-                <p className="mt-2 text-sm font-medium text-porcelain sm:text-[15px]">
+                <p className="mt-4 text-[15px] font-medium text-ink">
                   {stat.label}
                 </p>
-                <p className="mt-1.5 text-xs leading-relaxed text-fog">
+                <p className="mt-2 text-sm leading-relaxed text-slate">
                   {stat.detail}
                 </p>
               </dd>

@@ -1,7 +1,7 @@
 "use client";
 
 // First-visit-of-the-day welcome splash. On the first page load each
-// calendar day (any route), a full-screen black overlay greets the
+// calendar day (any route), a full-screen paper overlay greets the
 // visitor with a gold shimmer-wave message, then fades out. Subsequent
 // loads the same day skip it (tracked in localStorage). Click to skip.
 
@@ -61,13 +61,13 @@ export default function WelcomeSplash() {
       aria-label="Welcome"
       onClick={dismiss}
       className={cn(
-        "fixed inset-0 z-[100] flex cursor-pointer items-center justify-center bg-black transition-opacity duration-700",
+        "fixed inset-0 z-[100] flex cursor-pointer items-center justify-center bg-paper transition-opacity duration-700",
         phase === "leaving" ? "opacity-0" : "opacity-100"
       )}
     >
       <TextShimmerWave
         as="h2"
-        className="max-w-4xl px-6 text-center font-display text-xl uppercase leading-relaxed tracking-[0.2em] [--base-color:#c9a24b] [--base-gradient-color:#e6cf94] md:text-3xl"
+        className="max-w-4xl px-6 text-center font-display text-xl uppercase leading-relaxed tracking-[0.2em] [--base-color:#8a6a1f] [--base-gradient-color:#0c0c0d] md:text-3xl"
         duration={1}
         spread={1}
         zDistance={1}

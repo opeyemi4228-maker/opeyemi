@@ -1,67 +1,93 @@
 @import "tailwindcss";
 
 /* ============================================
-   Design tokens — luxury / cinematic palette
-   Pure black surfaces (BMW/Lotus night mode),
-   a single refined gold accent.
+   Design tokens
 
-   Fonts: Montserrat (body), Barlow ≈ Lotus (display).
-   (The real BMW/Lotus typefaces are proprietary —
-   to use licensed files later, load them with
-   next/font/local in app/layout.jsx and keep the
-   same CSS variable names.)
+   The site runs on a light, editorial palette —
+   BMW / Mercedes-Benz surface discipline, Obama
+   Library content rhythm, BitLayerX clarity:
+   paper white, one warm off-white band, hairline
+   rules, near-black type, one gold accent.
+
+   The dark scale below it is kept verbatim because
+   the essays under /insights still run on it. Those
+   pages are deliberately untouched, so `ink`,
+   `charcoal`, `smoke`, `fog` and `porcelain` must
+   keep their original values.
+
+   Type: Inter (body), Archivo (display),
+   Newsreader (the editorial serif voice).
    ============================================ */
 @theme {
-  --color-ink: #000000; /* page background — pure black */
-  --color-charcoal: #050505; /* elevated bands (reads black) */
-  --color-smoke: #1a1a1a; /* borders, dividers */
-  --color-fog: #a1a1aa; /* muted body text on dark */
-  --color-porcelain: #f7f7f5; /* light sections */
-  --color-gold: #c9a24b; /* signature accent */
-  --color-gold-soft: #e6cf94; /* accent hover / gradients */
+  /* ---- Light scale — the default surface ---- */
+  --color-paper: #ffffff; /* page background */
+  --color-alabaster: #f6f5f2; /* alternating band */
+  --color-mist: #edebe6; /* image beds, inset panels */
+  --color-hairline: #e2e0da; /* 1px rules and card edges */
+  --color-graphite: #33333a; /* body copy on light */
+  --color-slate: #6a6a72; /* meta and secondary copy */
+  --color-gold-ink: #8a6a1f; /* the accent, legible on paper */
 
-  --font-sans: var(--font-mont), system-ui, sans-serif;
-  --font-display: var(--font-barlow), system-ui, sans-serif;
-  --font-montserrat: var(--font-mont), system-ui, sans-serif;
+  /* ---- Dark scale — retained for the essays ---- */
+  --color-ink: #000000; /* also the type colour for headings */
+  --color-charcoal: #050505;
+  --color-smoke: #1a1a1a;
+  --color-fog: #a1a1aa;
+  --color-porcelain: #f7f7f5;
+  --color-gold: #c9a24b;
+  --color-gold-soft: #e6cf94;
+
+  /* ---- Typefaces ---- */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-editorial: var(--font-newsreader), Georgia, serif;
 }
 
 /* ---------- Base ---------- */
 html {
   scroll-behavior: smooth;
-}
-
-/* Respect the OS "reduce motion" setting. Vestibular triggers are an
-   accessibility failure, not a taste question. */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Visible keyboard focus everywhere, in the brand accent. */
-:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 3px;
+  /* The header is fixed; anchor targets must clear it. */
+  scroll-padding-top: 8rem;
 }
 
 body {
-  @apply bg-ink text-porcelain antialiased;
+  @apply bg-paper text-graphite antialiased;
   font-family: var(--font-sans);
+  /* Inter and Newsreader both carry an optical-size axis; letting the
+     browser drive it is what keeps small labels open and large settings
+     tight without a second font file. */
+  font-optical-sizing: auto;
+}
+
+/* Archivo's uppercase is drawn wide. At display sizes that generosity turns
+   into gaps, so every large display setting pulls back a little. Applied on
+   the element rather than per-utility, so no heading can forget it. */
+:where(h1, h2) .font-display,
+:where(h1, h2).font-display {
+  letter-spacing: -0.015em;
+}
+
+/* Visible keyboard focus everywhere. gold-ink is the one accent value that
+   clears 3:1 against both paper and the essays' black. */
+:focus-visible {
+  outline: 2px solid var(--color-gold-ink);
+  outline-offset: 3px;
+}
+
+/* gold-ink is legible on paper and nearly invisible on black, so any
+   focused control inside a dark section switches to the light gold. Keyed
+   off the surface utilities themselves, which is what every dark block on
+   the site is already built from — no section has to remember to opt in. */
+:is(.bg-ink, .bg-charcoal, .bg-smoke) :focus-visible {
+  outline-color: var(--color-gold-soft);
 }
 
 ::selection {
   @apply bg-gold text-ink;
 }
 
-/* Honour the OS motion preference (hero scroll cue, shimmer, reveals). */
+/* Respect the OS "reduce motion" setting. Vestibular triggers are an
+   accessibility failure, not a taste question. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -80,4 +106,20 @@ body {
 /* ---------- Utilities ---------- */
 @utility text-balance {
   text-wrap: balance;
+}
+
+/* The editorial serif voice — the creed, pull quotes, essay ledes. Newsreader
+   sets a touch large for its point size, so it is nudged back to sit level
+   with the grotesque around it. */
+@utility editorial {
+  font-family: var(--font-editorial);
+  font-optical-sizing: auto;
+  letter-spacing: -0.005em;
+}
+
+/* Tabular figures for anything that counts: stats, years, metrics. Stops
+   numbers from shifting width as they animate. */
+@utility numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }

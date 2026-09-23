@@ -33,22 +33,22 @@ export default function SpeakingPage() {
       />
 
       {/* Fast facts */}
-      <section className="bg-ink pb-20">
+      <section className="bg-paper pb-20">
         <div className="mx-auto max-w-7xl px-6">
-          <dl className="grid gap-px border border-smoke bg-smoke sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="grid gap-px border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-4">
             {facts.map((fact) => (
-              <div key={fact.label} className="bg-ink p-6">
-                <dt className="text-[10px] uppercase tracking-[0.3em] text-fog">
+              <div key={fact.label} className="bg-paper p-7">
+                <dt className="text-[10px] font-semibold uppercase tracking-[0.28em] text-slate">
                   {fact.label}
                 </dt>
-                <dd className="mt-2 text-[15px] text-porcelain">{fact.value}</dd>
+                <dd className="mt-2.5 text-[15px] text-ink">{fact.value}</dd>
               </div>
             ))}
           </dl>
 
           <a
             href={`mailto:${siteConfig.email}?subject=${encodeURIComponent("Speaking enquiry")}`}
-            className="mt-6 inline-flex items-center gap-2.5 bg-gold px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold-soft"
+            className="mt-6 inline-flex items-center gap-2.5 rounded-full bg-ink px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-gold-ink"
           >
             <Mail aria-hidden="true" className="h-4 w-4" />
             {siteConfig.email}
@@ -57,24 +57,27 @@ export default function SpeakingPage() {
       </section>
 
       {/* Bios */}
-      <section className="border-t border-smoke bg-charcoal py-24">
+      <section className="border-y border-hairline bg-alabaster py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading eyebrow="Bios" title="Three Lengths, Ready to Paste" />
           <div className="space-y-6">
             {bios.map((bio) => (
-              <article key={bio.length} className="border border-smoke bg-ink p-7 sm:p-9">
+              <article
+                key={bio.length}
+                className="border border-hairline bg-paper p-7 sm:p-9"
+              >
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-baseline gap-3">
-                    <h3 className="font-display text-xl text-porcelain">
+                    <h3 className="font-display text-xl text-ink">
                       {bio.length}
                     </h3>
-                    <span className="text-[11px] uppercase tracking-[0.2em] text-gold">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-ink">
                       {bio.words}
                     </span>
                   </div>
                   <CopyButton text={bio.text} label={`Copy ${bio.length.toLowerCase()}`} />
                 </div>
-                <p className="mt-5 leading-relaxed text-fog">{bio.text}</p>
+                <p className="mt-5 leading-[1.8] text-slate">{bio.text}</p>
               </article>
             ))}
           </div>
@@ -82,7 +85,7 @@ export default function SpeakingPage() {
       </section>
 
       {/* Photography */}
-      <section className="bg-ink py-24">
+      <section className="bg-paper py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading
             eyebrow="Photography"
@@ -90,8 +93,8 @@ export default function SpeakingPage() {
           />
           <div className="grid gap-6 sm:grid-cols-2">
             {photos.map((photo) => (
-              <figure key={photo.src} className="border border-smoke bg-charcoal">
-                <div className="relative aspect-4/5 w-full overflow-hidden">
+              <figure key={photo.src} className="border border-hairline bg-paper">
+                <div className="relative aspect-4/5 w-full overflow-hidden bg-mist">
                   <Image
                     src={photo.src}
                     alt={`${photo.label} of ${siteConfig.name}`}
@@ -102,13 +105,13 @@ export default function SpeakingPage() {
                 </div>
                 <figcaption className="flex flex-wrap items-center justify-between gap-4 p-6">
                   <div>
-                    <p className="text-sm text-porcelain">{photo.label}</p>
-                    <p className="mt-1 text-xs text-fog">{photo.note}</p>
+                    <p className="text-sm font-medium text-ink">{photo.label}</p>
+                    <p className="mt-1 text-xs text-slate">{photo.note}</p>
                   </div>
                   <a
                     href={photo.src}
                     download
-                    className="inline-flex shrink-0 items-center gap-2 border border-smoke px-4 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-fog transition-colors hover:border-gold hover:text-gold"
+                    className="inline-flex shrink-0 items-center gap-2 rounded-full border border-hairline px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
                   >
                     <Download aria-hidden="true" className="h-3.5 w-3.5" />
                     Download
@@ -121,28 +124,31 @@ export default function SpeakingPage() {
       </section>
 
       {/* Topics */}
-      <section className="border-t border-smoke bg-charcoal py-24">
+      <section className="border-y border-hairline bg-alabaster py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading eyebrow="Topics" title="What I Speak About" />
           <div className="grid gap-6 lg:grid-cols-3">
             {topics.map((topic, i) => (
-              <article key={topic.title} className="border border-smoke bg-ink p-8">
-                <span className="font-display text-3xl text-gold/40">
+              <article
+                key={topic.title}
+                className="border border-hairline bg-paper p-8"
+              >
+                <span className="font-display text-3xl font-light text-gold-ink/50">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 font-display text-xl text-porcelain">
+                <h3 className="mt-4 font-display text-xl text-ink">
                   {topic.title}
                 </h3>
-                <p className="mt-2 text-sm text-gold">{topic.subtitle}</p>
+                <p className="mt-2 text-sm text-gold-ink">{topic.subtitle}</p>
                 <ul className="mt-6 space-y-3">
                   {topic.points.map((point) => (
                     <li
                       key={point}
-                      className="flex gap-3 text-sm leading-relaxed text-fog"
+                      className="flex gap-3 text-sm leading-relaxed text-slate"
                     >
                       <span
                         aria-hidden="true"
-                        className="mt-2 h-1 w-1 shrink-0 bg-gold"
+                        className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold-ink"
                       />
                       {point}
                     </li>
@@ -155,18 +161,18 @@ export default function SpeakingPage() {
       </section>
 
       {/* Platforms + requirements */}
-      <section className="bg-ink py-24">
+      <section className="bg-paper py-20 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionHeading eyebrow="Platforms" title="Where I Have Led" />
             <ul className="space-y-6">
               {platforms.map((p) => (
-                <li key={p.org} className="border-l-2 border-gold/60 pl-5">
-                  <p className="text-[11px] uppercase tracking-[0.25em] text-gold">
+                <li key={p.org} className="border-l-2 border-gold pl-5">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-ink">
                     {p.year}
                   </p>
-                  <p className="mt-2 text-porcelain">{p.role}</p>
-                  <p className="mt-1 text-sm text-fog">{p.org}</p>
+                  <p className="mt-2 text-ink">{p.role}</p>
+                  <p className="mt-1 text-sm text-slate">{p.org}</p>
                 </li>
               ))}
             </ul>
@@ -178,22 +184,22 @@ export default function SpeakingPage() {
               {requirements.map((req) => (
                 <li
                   key={req}
-                  className="flex gap-3 border-b border-smoke pb-4 text-sm text-fog"
+                  className="flex gap-3 border-b border-hairline pb-4 text-sm text-slate"
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-2 h-1 w-1 shrink-0 bg-gold"
+                    className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold-ink"
                   />
                   {req}
                 </li>
               ))}
             </ul>
-            <p className="mt-8 text-sm leading-relaxed text-fog">
+            <p className="mt-8 text-sm leading-relaxed text-slate">
               Travelling from {siteConfig.location}. Remote and in person both
               work. For availability, write to{" "}
               <a
                 href={`mailto:${siteConfig.email}?subject=${encodeURIComponent("Speaking enquiry")}`}
-                className="text-porcelain underline underline-offset-4 transition-colors hover:text-gold"
+                className="text-ink underline underline-offset-4 transition-colors hover:text-gold-ink"
               >
                 {siteConfig.email}
               </a>

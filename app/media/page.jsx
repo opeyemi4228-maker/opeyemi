@@ -76,14 +76,14 @@ export default function MediaPage() {
         description="Press, appearances, and the moments in between, each frame with the story behind it."
       />
 
-      <section className="bg-ink pb-32">
+      <section className="bg-paper pb-28">
         <div className="mx-auto max-w-7xl columns-1 gap-6 space-y-6 px-6 sm:columns-2 lg:columns-3">
           {gallery.map((item) => (
             <figure
               key={item.src}
-              className="group break-inside-avoid overflow-hidden border border-smoke bg-charcoal"
+              className="group break-inside-avoid overflow-hidden border border-hairline bg-paper transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(0,0,0,0.28)]"
             >
-              <div className={`relative w-full overflow-hidden ${item.aspect}`}>
+              <div className={`relative w-full overflow-hidden bg-mist ${item.aspect}`}>
                 <Image
                   src={item.src}
                   alt={item.title}
@@ -93,10 +93,10 @@ export default function MediaPage() {
                 />
               </div>
               <figcaption className="p-6">
-                <p className="text-xs uppercase tracking-[0.25em] text-gold">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gold-ink">
                   {item.title}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-fog">
+                <p className="mt-3 text-sm leading-relaxed text-slate">
                   {item.story}
                 </p>
               </figcaption>

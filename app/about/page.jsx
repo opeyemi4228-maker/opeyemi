@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 import PageHeader from "@/components/shared/PageHeader";
 import SectionHeading from "@/components/shared/SectionHeading";
-import { Button } from "@/components/ui/Button";
 import { timeline } from "@/data/timeline";
 import { siteConfig } from "@/data/site";
 import {
@@ -88,18 +87,18 @@ export default function AboutPage() {
       />
 
       {/* Manifesto band */}
-      <section className="border-y border-smoke bg-charcoal py-24 md:py-32">
+      <section className="border-y border-hairline bg-alabaster py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6">
-          <p className="font-display text-3xl leading-snug text-balance text-porcelain md:text-5xl">
+          <p className="font-display text-[1.9rem] leading-snug text-balance text-ink sm:text-4xl md:text-5xl">
             I build the way the earth demands:{" "}
-            <span className="text-gold">measure first</span>, design backwards
-            from consequences, and{" "}
-            <span className="text-gold">keep the standard</span> when it is
+            <span className="text-gold-ink">measure first</span>, design
+            backwards from consequences, and{" "}
+            <span className="text-gold-ink">keep the standard</span> when it is
             inconvenient.
           </p>
           <div className="mt-10 flex items-center gap-4">
-            <span aria-hidden="true" className="h-px w-10 bg-gold" />
-            <p className="text-xs uppercase tracking-[0.35em] text-fog">
+            <span aria-hidden="true" className="h-px w-8 bg-gold-ink" />
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate">
               {siteConfig.name} · {siteConfig.role}
             </p>
           </div>
@@ -107,9 +106,9 @@ export default function AboutPage() {
       </section>
 
       {/* Bio, portrait + narrative */}
-      <section className="bg-ink py-24 md:py-32">
-        <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[2fr_3fr] lg:gap-20">
-          <div className="relative aspect-3/4 w-full max-w-md overflow-hidden justify-self-center lg:justify-self-start">
+      <section className="bg-paper py-20 md:py-28">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[2fr_3fr] lg:gap-20">
+          <div className="relative aspect-3/4 w-full max-w-md overflow-hidden bg-mist justify-self-center lg:justify-self-start">
             <Image
               src="/images/about/portrait-bio.jpg"
               alt={`Portrait of ${siteConfig.name}`}
@@ -118,9 +117,11 @@ export default function AboutPage() {
               className="object-cover"
             />
           </div>
-          <div className="space-y-6 text-lg leading-relaxed text-fog">
+          <div className="space-y-6 text-[17px] leading-[1.8] text-slate lg:text-lg">
             <p>
-              <span className="text-porcelain">Opeyemi Titus Ojurongbe</span>{" "}
+              <span className="font-medium text-ink">
+                Opeyemi Titus Ojurongbe
+              </span>{" "}
               is a design engineer, a registered mining engineer with the
               Nigerian Society of Engineers, and the Founder &amp; CEO of
               BitLayerX Technologies. His career runs on a single conviction:
@@ -155,22 +156,22 @@ export default function AboutPage() {
       </section>
 
       {/* Credentials, numbered mandates */}
-      <section className="border-t border-smoke bg-ink pb-24 md:pb-32">
-        <div className="mx-auto max-w-7xl px-6 pt-24 md:pt-32">
+      <section className="border-t border-hairline bg-paper py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6">
           <SectionHeading eyebrow="Recognition" title="Credentials & Mandates" />
-          <div className="grid gap-px border border-smoke bg-smoke sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-4">
             {credentials.map((item, i) => (
               <div
                 key={item.title}
-                className="group bg-ink p-8 transition-colors hover:bg-charcoal"
+                className="group bg-paper p-8 transition-colors hover:bg-alabaster"
               >
-                <p className="font-display text-4xl font-light text-gold/60 transition-colors group-hover:text-gold">
+                <p className="font-display text-4xl font-light text-gold-ink/45 transition-colors group-hover:text-gold-ink">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-6 font-display text-xl text-porcelain">
+                <h3 className="mt-6 font-display text-xl text-ink">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-fog">
+                <p className="mt-3 text-sm leading-relaxed text-slate">
                   {item.detail}
                 </p>
               </div>
@@ -180,7 +181,7 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications */}
-      <section className="border-y border-smoke bg-charcoal py-24 md:py-32">
+      <section className="border-y border-hairline bg-alabaster py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading
             eyebrow="Certifications"
@@ -192,19 +193,19 @@ export default function AboutPage() {
               return (
                 <div
                   key={cert.title}
-                  className="group flex flex-col border border-smoke bg-ink p-8 transition-colors hover:border-gold/50"
+                  className="flex flex-col border border-hairline bg-paper p-8 transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(0,0,0,0.25)]"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center bg-gold/10 text-gold">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-mist text-gold-ink">
                     <Icon aria-hidden="true" className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-6 font-display text-lg text-porcelain">
+                  <h3 className="mt-6 font-display text-lg text-ink">
                     {cert.title}
                   </h3>
-                  <p className="mt-2 text-[11px] uppercase tracking-[0.25em] text-gold">
+                  <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-ink">
                     {cert.issuer}
                     {cert.year ? ` · ${cert.year}` : ""}
                   </p>
-                  <p className="mt-4 text-sm leading-relaxed text-fog">
+                  <p className="mt-4 text-sm leading-relaxed text-slate">
                     {cert.focus}
                   </p>
                 </div>
@@ -215,25 +216,25 @@ export default function AboutPage() {
       </section>
 
       {/* Expertise, the working toolkit */}
-      <section className="bg-ink py-24 md:py-32">
+      <section className="bg-paper py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading eyebrow="Expertise" title="One Engineer, Many Grounds" />
-          <div className="grid gap-px border border-smoke bg-smoke sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-px border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-3">
             {expertise.map((item, i) => {
               const Icon = expertiseIcons[i % expertiseIcons.length];
               return (
                 <div
                   key={item.area}
-                  className="group bg-ink p-8 transition-colors hover:bg-charcoal"
+                  className="group bg-paper p-8 transition-colors hover:bg-alabaster"
                 >
                   <Icon
                     aria-hidden="true"
-                    className="h-5 w-5 text-gold/70 transition-colors group-hover:text-gold"
+                    className="h-5 w-5 text-gold-ink/70 transition-colors group-hover:text-gold-ink"
                   />
-                  <h3 className="mt-5 font-display text-lg text-porcelain">
+                  <h3 className="mt-5 font-display text-lg text-ink">
                     {item.area}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-fog">
+                  <p className="mt-3 text-sm leading-relaxed text-slate">
                     {item.detail}
                   </p>
                 </div>
@@ -244,7 +245,7 @@ export default function AboutPage() {
       </section>
 
       {/* Philosophy, four pillars */}
-      <section className="border-y border-smoke bg-charcoal py-24 md:py-32">
+      <section className="border-y border-hairline bg-alabaster py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading
             eyebrow="Philosophy"
@@ -252,12 +253,12 @@ export default function AboutPage() {
           />
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-14">
             {pillars.map((pillar) => (
-              <div key={pillar.title}>
-                <h3 className="font-display text-2xl text-gold">
+              <div key={pillar.title} className="border-t-2 border-ink pt-7">
+                <h3 className="font-display text-2xl text-ink">
                   {pillar.title}
                 </h3>
                 {pillar.body.map((paragraph, i) => (
-                  <p key={i} className="mt-5 leading-relaxed text-fog">
+                  <p key={i} className="mt-5 leading-[1.8] text-slate">
                     {paragraph}
                   </p>
                 ))}
@@ -268,20 +269,23 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="bg-ink py-24 md:py-32">
+      <section className="bg-paper py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading eyebrow="Journey" title="Milestones" />
-          <ol className="max-w-3xl space-y-14 border-l border-smoke pl-8">
+          <ol className="max-w-3xl space-y-12 border-l border-hairline pl-8">
             {timeline.map((item) => (
               <li key={item.year} className="relative">
-                <span className="absolute -left-9.25 top-2 h-2 w-2 bg-gold" />
-                <p className="text-sm uppercase tracking-[0.3em] text-gold">
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-[2.3rem] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-gold-ink bg-paper"
+                />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-ink">
                   {item.year}
                 </p>
-                <h3 className="mt-2 font-display text-2xl text-porcelain">
+                <h3 className="mt-2.5 font-display text-2xl text-ink">
                   {item.title}
                 </h3>
-                <p className="mt-3 leading-relaxed text-fog">
+                <p className="mt-3 leading-relaxed text-slate">
                   {item.description}
                 </p>
               </li>
@@ -291,30 +295,33 @@ export default function AboutPage() {
       </section>
 
       {/* Closing CTA */}
-      <section className="border-t border-smoke bg-charcoal py-24 md:py-32">
+      <section className="bg-ink py-20 text-porcelain md:py-28">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Landmark aria-hidden="true" className="mx-auto h-8 w-8 text-gold" />
-          <h2 className="mt-8 font-display text-4xl text-balance text-porcelain md:text-5xl">
+          <h2 className="mt-8 font-display text-3xl text-balance sm:text-4xl md:text-5xl">
             The next chapter is being engineered.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-fog">
             Partnerships, products, and people built to last. If that is the
             kind of work you do, let us talk.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button asChild variant="gold" className="rounded-full px-9">
-              <Link href="/contact">
-                Start a Conversation
-                <ArrowRight aria-hidden="true" className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-full border-porcelain/40 px-9"
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <Link
+              href="/contact"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-porcelain px-9 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold sm:w-auto"
             >
-              <Link href="/ventures">Explore Ventures</Link>
-            </Button>
+              Start a Conversation
+              <ArrowRight
+                aria-hidden="true"
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+            <Link
+              href="/ventures"
+              className="inline-flex w-full items-center justify-center rounded-full border border-porcelain/30 px-9 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-porcelain transition-colors hover:border-porcelain hover:bg-porcelain hover:text-ink sm:w-auto"
+            >
+              Explore Ventures
+            </Link>
           </div>
         </div>
       </section>

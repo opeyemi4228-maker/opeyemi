@@ -25,7 +25,7 @@ export default function CopyButton({ text, label = "Copy" }) {
       type="button"
       onClick={handleCopy}
       aria-live="polite"
-      className="inline-flex shrink-0 items-center gap-2 border border-smoke px-4 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-fog transition-colors hover:border-gold hover:text-gold"
+      className="inline-flex shrink-0 items-center gap-2 rounded-full border border-hairline px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper"
     >
       {copied ? (
         <>

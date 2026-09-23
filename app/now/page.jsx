@@ -47,33 +47,33 @@ export default function NowPage() {
         description="A snapshot rather than a CV. Updated monthly, so you are reading something current."
       />
 
-      <section className="bg-ink pb-32">
+      <section className="bg-paper pb-28">
         <div className="mx-auto max-w-3xl px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-ink">
             Last updated {LAST_UPDATED} · {siteConfig.location}
           </p>
 
           <div className="mt-12 space-y-12">
             {entries.map((entry) => (
-              <article key={entry.heading}>
-                <h2 className="font-display text-2xl text-porcelain">
+              <article key={entry.heading} className="border-t-2 border-ink pt-7">
+                <h2 className="font-display text-2xl text-ink">
                   {entry.heading}
                 </h2>
-                <p className="mt-4 text-[17px] leading-[1.85] text-fog">
+                <p className="mt-4 text-[17px] leading-[1.85] text-slate">
                   {entry.body}
                 </p>
               </article>
             ))}
           </div>
 
-          <div className="mt-16 border-t border-smoke pt-10">
-            <p className="text-sm leading-relaxed text-fog">
+          <div className="mt-16 border-t border-hairline pt-10">
+            <p className="text-sm leading-relaxed text-slate">
               If any of that overlaps with what you are working on, I would
               like to hear about it.
             </p>
             <Link
               href="/contact"
-              className="group mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-porcelain transition-colors hover:text-gold"
+              className="group mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-gold-ink"
             >
               Start a conversation
               <ArrowRight

@@ -1,15 +1,25 @@
 "use client";
 
-// Lotus-style header built on the header-1 mechanics:
-// - transparent over the hero → black glass on scroll (useScrolled)
-// - centered wordmark, uppercase tracked link row below (desktop)
+// Fixed header, BMW/Mercedes chrome discipline:
+// - paper surface, hairline base rule, a shadow that only appears on scroll
+// - centred wordmark, uppercase tracked link rail below it (desktop), with a
+//   gold underline marking the current section
 // - animated hamburger opening a portal full-screen menu (mobile)
+//
+// It carries a second, inverted skin for the stretch where it sits over the
+// home page's dark hero: no fill, no rule, porcelain type. The earlier note
+// here argued that chrome which changes colour cannot be trusted, and that
+// still holds for a bar that fades in and out at an arbitrary scroll offset.
+// This one does not guess: the dark section declares its own extent and the
+// bar switches at exactly the pixel it stops overlapping it, which reads as
+// one continuous surface rather than a header changing its mind.
 
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { MenuToggleIcon } from "@/components/ui/MenuToggleIcon";
 import { useScrolled } from "@/hooks/useScrolled";
@@ -18,6 +28,11 @@ import { siteConfig } from "@/data/site";
 import SocialLinks from "@/components/shared/SocialLinks";
 import { cn } from "@/lib/utils";
 
+// Routes whose page opens on a dark, full-bleed hero. See the note on
+// `overDark` below: this and the hero's #dark-region-end marker have to
+// agree, or the bar picks the wrong skin for the first frame.
+const DARK_HERO_ROUTES = new Set(["/"]);
+
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const scrolled = useScrolled(10);
@@ -25,6 +40,62 @@ export default function Navbar() {
   const toggleRef = React.useRef(null);
 
   const close = React.useCallback(() => setOpen(false), []);
+
+  // Is the bar over dark artwork, and over nothing else? The hero marks the
+  // base of its dark region with #dark-region-end; the observer's root is
+  // cut back to everything *below* the bar, so the marker is intersecting
+  // for exactly as long as the whole bar still has black behind it.
+  //
+  // "The whole bar" is the point. A bar that stayed light-on-transparent
+  // until the hero had fully gone would spend the 128px in between sitting
+  // half on black and half on the white section under it, with porcelain
+  // type crossing the seam. Switching the moment that seam reaches the bar
+  // hands the straddle to the opaque skin, which simply covers it.
+  //
+  // Measuring the bar rather than hard-coding 64/128px keeps the switch
+  // exact at every breakpoint; the large bottom margin keeps a hero that is
+  // taller than the viewport inside the root. Pages with no dark region
+  // never turn it on.
+  //
+  // The value has to be right on the very first paint, before any observer
+  // can run, or the bar flashes white over the hero. So it starts from the
+  // route — home is the one page that opens dark — and the observer takes
+  // over from there. That makes DARK_HERO_ROUTES and the marker two halves
+  // of one fact: a route listed here must render #dark-region-end, and a
+  // route that renders it must be listed here.
+  const headerRef = React.useRef(null);
+  const [overDark, setOverDark] = React.useState(() =>
+    DARK_HERO_ROUTES.has(pathname)
+  );
+
+  React.useEffect(() => {
+    const marker = document.getElementById("dark-region-end");
+    if (!marker) return;
+
+    let observer;
+    const watch = () => {
+      observer?.disconnect();
+      const bar = Math.round(headerRef.current?.getBoundingClientRect().height ?? 0);
+      observer = new IntersectionObserver(
+        ([entry]) => setOverDark(entry.isIntersecting),
+        { rootMargin: `-${bar}px 0px 100000px 0px` }
+      );
+      observer.observe(marker);
+    };
+
+    watch();
+    // Both the bar's height and the viewport's change at a breakpoint, and
+    // mobile browsers resize the viewport as their toolbars collapse.
+    window.addEventListener("resize", watch);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", watch);
+    };
+  }, [pathname]);
+
+  // The menu panel is paper, so the bar above it has to be too — otherwise
+  // the close icon is porcelain on white.
+  const onDark = overDark && !open;
 
   // Lock the page while the menu is open. `position: fixed` (rather than
   // `overflow: hidden`) is what actually holds iOS Safari still; the scroll
@@ -60,6 +131,10 @@ export default function Navbar() {
   if (lastPath !== pathname) {
     setLastPath(pathname);
     setOpen(false);
+    // Back to the route's own answer. The old page's observer is gone and
+    // the new page's has not mounted, so without this the bar would arrive
+    // on a light page still wearing the skin it had on the dark one.
+    setOverDark(DARK_HERO_ROUTES.has(pathname));
   }
 
   // Close when the viewport crosses into the desktop layout — the panel is
@@ -87,33 +162,68 @@ export default function Navbar() {
 
   return (
     <header
+      ref={headerRef}
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled || open
-          ? "border-b border-white/10 bg-black/90 backdrop-blur-lg supports-[backdrop-filter]:bg-black/70"
-          : "bg-gradient-to-b from-black/70 via-black/30 to-transparent"
+        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300",
+        // Three states, not two.
+        //
+        // At rest on the hero the bar is nothing at all — no fill, no rule,
+        // the photograph running right up under the wordmark. The moment
+        // the page moves it takes an ink fill, because the hero's own meta
+        // rail scrolls up behind it and would otherwise read straight
+        // through the wordmark. Black on black makes that fill invisible,
+        // so the bar gains substance without appearing to change.
+        //
+        // Off the dark region it is opaque paper. Opaque, not frosted: the
+        // bar has to cover the hero's last strip as it passes underneath,
+        // and 85% white over black is a grey band announcing that it
+        // cannot.
+        onDark
+          ? cn(
+              "shadow-none",
+              scrolled
+                ? "border-porcelain/10 bg-ink"
+                : "border-transparent bg-transparent"
+            )
+          : cn(
+              "border-hairline bg-paper",
+              scrolled ? "shadow-[0_1px_24px_rgba(0,0,0,0.06)]" : "shadow-none"
+            )
       )}
     >
-      {/* Top row, centered wordmark, actions right */}
+      {/* Top row, centred wordmark, actions right */}
       <nav className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-4 md:h-20 md:px-6">
         <div aria-hidden="true" />
         <Link
           href="/"
           onClick={close}
-          className="justify-self-center whitespace-nowrap font-display text-sm font-semibold uppercase tracking-[0.15em] text-porcelain sm:text-base sm:tracking-[0.2em] md:text-xl md:tracking-[0.25em]"
+          className={cn(
+            "justify-self-center whitespace-nowrap font-display text-sm font-semibold uppercase tracking-[0.15em] transition-colors sm:text-base sm:tracking-[0.2em] md:text-xl md:tracking-[0.25em]",
+            onDark
+              ? "text-porcelain hover:text-gold-soft"
+              : "text-ink hover:text-gold-ink"
+          )}
         >
           {siteConfig.wordmark}
         </Link>
         <div className="flex items-center justify-self-end gap-3">
-          <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+          <Button
+            asChild
+            size="sm"
+            variant={onDark ? "outlineInverse" : "default"}
+            className="hidden md:inline-flex"
+          >
             <Link href="/contact">Get in Touch</Link>
           </Button>
           <Button
             ref={toggleRef}
             size="icon"
-            variant="outline"
+            variant="ghost"
             onClick={() => setOpen((v) => !v)}
-            className="relative z-50 border-transparent md:hidden"
+            className={cn(
+              "relative z-50 md:hidden",
+              onDark ? "text-porcelain" : "text-ink"
+            )}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -123,22 +233,43 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Second row, Lotus-style uppercase link rail (desktop) */}
-      <div className="hidden border-t border-white/10 md:block">
+      {/* Second row, uppercase link rail (desktop). The active item carries a
+          gold underline flush with the header's base rule. */}
+      <div
+        className={cn(
+          "hidden border-t transition-colors duration-300 md:block",
+          onDark ? "border-porcelain/15" : "border-hairline"
+        )}
+      >
         <ul className="mx-auto flex h-12 max-w-7xl items-center justify-center gap-12 px-6">
           {navLinks.map((link) => {
             const active = pathname.startsWith(link.href);
             return (
-              <li key={link.href}>
+              <li key={link.href} className="relative h-full">
                 <Link
                   href={link.href}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
-                    "text-xs font-semibold uppercase tracking-[0.25em] transition-colors",
-                    active ? "text-porcelain" : "text-fog hover:text-porcelain"
+                    "flex h-full items-center text-[11px] font-semibold uppercase tracking-[0.25em] transition-colors",
+                    onDark
+                      ? active
+                        ? "text-porcelain"
+                        : "text-porcelain/60 hover:text-porcelain"
+                      : active
+                        ? "text-ink"
+                        : "text-slate hover:text-ink"
                   )}
                 >
                   {link.label}
                 </Link>
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute inset-x-0 -bottom-px h-0.5 origin-center transition-transform duration-300",
+                    onDark ? "bg-gold" : "bg-gold-ink",
+                    active ? "scale-x-100" : "scale-x-0"
+                  )}
+                />
               </li>
             );
           })}
@@ -219,12 +350,12 @@ function MobileMenu({ open, pathname, onClose }) {
           exit="exit"
           // Scrollable, not clipped: short landscape phones still reach the
           // CTA and socials at the bottom.
-          className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col overflow-y-auto overscroll-contain border-t border-white/10 bg-black/95 backdrop-blur-lg md:hidden"
+          className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col overflow-y-auto overscroll-contain border-t border-hairline bg-paper md:hidden"
         >
           {/* Every level between the panel and the staggered items must be a
               motion component — variant propagation stops at plain DOM. */}
           <motion.div className="flex min-h-full flex-col justify-between gap-10 p-6 pb-[max(3rem,env(safe-area-inset-bottom))]">
-            <motion.ul className="mt-6 space-y-2">
+            <motion.ul className="mt-4 divide-y divide-hairline border-y border-hairline">
               {navLinks.map((link) => {
                 const active = pathname.startsWith(link.href);
                 return (
@@ -234,25 +365,25 @@ function MobileMenu({ open, pathname, onClose }) {
                       onClick={onClose}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "flex items-center gap-3 py-2.5 font-display text-xl uppercase tracking-[0.2em] transition-colors",
-                        active ? "text-gold" : "text-porcelain hover:text-gold"
+                        "flex items-center justify-between gap-3 py-5 font-display text-xl uppercase tracking-[0.18em] transition-colors",
+                        active ? "text-gold-ink" : "text-ink hover:text-gold-ink"
                       )}
                     >
-                      <span
+                      {link.label}
+                      <ArrowRight
                         aria-hidden="true"
                         className={cn(
-                          "h-px transition-all duration-300",
-                          active ? "w-6 bg-gold" : "w-0 bg-transparent"
+                          "h-4 w-4 shrink-0 transition-colors",
+                          active ? "text-gold-ink" : "text-slate"
                         )}
                       />
-                      {link.label}
                     </Link>
                   </motion.li>
                 );
               })}
             </motion.ul>
             <motion.div variants={itemVariants} className="space-y-8">
-              <Button asChild variant="outline" className="w-full">
+              <Button asChild className="w-full">
                 <Link href="/contact" onClick={onClose}>
                   Get in Touch
                 </Link>

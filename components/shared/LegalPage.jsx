@@ -8,20 +8,20 @@ export default function LegalPage({ eyebrow, title, description, updated, sectio
     <>
       <PageHeader eyebrow={eyebrow} title={title} description={description} />
 
-      <section className="bg-ink pb-32">
+      <section className="bg-paper pb-28">
         <div className="mx-auto max-w-3xl px-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-ink">
             Last updated {updated}
           </p>
 
-          <div className="mt-12 space-y-10">
+          <div className="mt-12 space-y-12">
             {sections.map((section) => (
               <article key={section.heading}>
-                <h2 className="font-display text-xl text-porcelain sm:text-2xl">
+                <h2 className="font-display text-xl text-ink sm:text-2xl">
                   {section.heading}
                 </h2>
                 {section.body.map((paragraph, i) => (
-                  <p key={i} className="mt-4 leading-[1.85] text-fog">
+                  <p key={i} className="mt-4 leading-[1.85] text-slate">
                     {paragraph}
                   </p>
                 ))}

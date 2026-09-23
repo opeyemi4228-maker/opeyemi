@@ -58,20 +58,20 @@ export default function ContactPage() {
         description="A product to launch. A partnership to explore. A team that needs a second opinion. The door is open, and a conversation costs nothing."
       />
 
-      <section className="bg-ink pb-32">
+      <section className="bg-paper pb-28">
         <div className="mx-auto max-w-7xl px-6">
           {/* Direct email, given its own weight. */}
-          <div className="flex flex-col gap-4 border-y border-smoke py-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 border-y-2 border-ink py-8 sm:flex-row sm:items-center sm:justify-between">
             <a
               href={`mailto:${siteConfig.email}`}
-              className="group inline-flex items-center gap-3 text-porcelain transition-colors hover:text-gold"
+              className="group inline-flex items-center gap-3 text-ink transition-colors hover:text-gold-ink"
             >
-              <Mail aria-hidden="true" className="h-5 w-5 shrink-0 text-gold" />
+              <Mail aria-hidden="true" className="h-5 w-5 shrink-0 text-gold-ink" />
               <span className="text-lg underline-offset-8 group-hover:underline sm:text-xl">
                 {siteConfig.email}
               </span>
             </a>
-            <p className="text-sm text-fog">
+            <p className="text-sm text-slate">
               Every enquiry is read. Considered replies over fast ones.
             </p>
           </div>
@@ -79,24 +79,24 @@ export default function ContactPage() {
           <div className="mt-16 grid gap-16 lg:grid-cols-[2fr_3fr] lg:gap-20">
             {/* Channels */}
             <div>
-              <h2 className="text-xs uppercase tracking-[0.3em] text-gold">
+              <h2 className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-ink">
                 What is this about?
               </h2>
 
-              <div className="mt-8 grid gap-px border border-smoke bg-smoke sm:grid-cols-2 lg:grid-cols-1">
+              <div className="mt-8 grid gap-px border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-1">
                 {channels.map(({ Icon, title, detail, action }) => (
-                  <div key={title} className="flex flex-col bg-ink p-7">
-                    <Icon aria-hidden="true" className="h-6 w-6 text-gold" />
-                    <h3 className="mt-4 font-display text-lg text-porcelain">
+                  <div key={title} className="flex flex-col bg-paper p-7">
+                    <Icon aria-hidden="true" className="h-6 w-6 text-gold-ink" />
+                    <h3 className="mt-4 font-display text-lg text-ink">
                       {title}
                     </h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-fog">
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">
                       {detail}
                     </p>
                     {action.external ? (
                       <a
                         href={action.href}
-                        className="group mt-5 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-porcelain transition-colors hover:text-gold"
+                        className="group mt-5 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:text-gold-ink"
                       >
                         {action.label}
                         <ArrowRight
@@ -107,7 +107,7 @@ export default function ContactPage() {
                     ) : (
                       <Link
                         href={action.href}
-                        className="group mt-5 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-porcelain transition-colors hover:text-gold"
+                        className="group mt-5 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:text-gold-ink"
                       >
                         {action.label}
                         <ArrowRight
@@ -121,7 +121,7 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-12">
-                <p className="text-xs uppercase tracking-[0.3em] text-fog">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate">
                   Elsewhere
                 </p>
                 <SocialLinks className="mt-5" />
@@ -131,12 +131,12 @@ export default function ContactPage() {
             {/* Form */}
             <div
               id="enquiry"
-              className="scroll-mt-32 border border-smoke bg-charcoal p-7 sm:p-10"
+              className="scroll-mt-36 self-start border border-hairline bg-alabaster p-7 sm:p-10"
             >
-              <h2 className="font-display text-2xl text-porcelain">
+              <h2 className="font-display text-2xl text-ink">
                 Tell me what we are building.
               </h2>
-              <p className="mt-2 mb-8 text-sm leading-relaxed text-fog">
+              <p className="mt-2 mb-8 text-sm leading-relaxed text-slate">
                 A few lines is enough to start. This opens your own email app,
                 so nothing is stored on this website.
               </p>

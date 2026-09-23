@@ -1,11 +1,10 @@
 // Ventures — portfolio of companies, practices, and mandates, told as
-// alternating full-width story panels (Lotus model-page rhythm):
-// portrait beside role eyebrow, display name, summary, and the story
-// behind the picture.
+// alternating full-width story panels: portrait beside role eyebrow,
+// display name, summary, and the story behind the picture.
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import PageHeader from "@/components/shared/PageHeader";
 import { ventures } from "@/data/ventures";
 
@@ -33,8 +32,8 @@ export default function VenturesPage() {
         description="Companies, practices, and mandates, each one a chapter, each picture a story."
       />
 
-      <section className="bg-ink pb-32">
-        <div className="mx-auto max-w-7xl space-y-24 px-6 md:space-y-32">
+      <section className="bg-paper pb-24 md:pb-32">
+        <div className="mx-auto max-w-7xl space-y-20 px-6 md:space-y-28">
           {ventures.map((venture, i) => (
             <article
               key={venture.slug}
@@ -42,7 +41,7 @@ export default function VenturesPage() {
             >
               {/* Picture */}
               <div
-                className={`relative aspect-4/5 w-full overflow-hidden bg-charcoal ${
+                className={`relative aspect-4/5 w-full overflow-hidden bg-mist ${
                   i % 2 === 1 ? "lg:order-last" : ""
                 }`}
               >
@@ -53,22 +52,24 @@ export default function VenturesPage() {
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
               </div>
 
               {/* Story */}
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-gold sm:text-sm">
-                  {venture.role}
-                </p>
-                <h2 className="mt-4 font-display text-3xl text-porcelain sm:text-4xl md:text-5xl">
+                <div className="flex items-center gap-4">
+                  <span aria-hidden="true" className="h-px w-8 shrink-0 bg-gold-ink" />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gold-ink">
+                    {venture.role}
+                  </p>
+                </div>
+                <h2 className="mt-5 font-display text-3xl text-ink sm:text-4xl md:text-5xl">
                   {venture.name}
                 </h2>
-                <p className="mt-6 leading-relaxed text-fog">
+                <p className="mt-6 text-[17px] leading-[1.8] text-slate">
                   {venture.summary}
                 </p>
                 {stories[venture.slug] && (
-                  <p className="mt-5 border-l-2 border-gold/60 pl-5 text-sm leading-relaxed text-fog/90 sm:text-base">
+                  <p className="mt-6 border-l-2 border-gold pl-5 text-[15px] leading-relaxed text-graphite">
                     {stories[venture.slug]}
                   </p>
                 )}
@@ -77,9 +78,13 @@ export default function VenturesPage() {
                     href={venture.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-porcelain transition-colors hover:text-gold"
+                    className="group mt-8 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink transition-colors hover:text-gold-ink"
                   >
-                    Visit <ArrowRight className="h-4 w-4" />
+                    Visit
+                    <ArrowUpRight
+                      aria-hidden="true"
+                      className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
                   </Link>
                 )}
               </div>
@@ -89,16 +94,20 @@ export default function VenturesPage() {
       </section>
 
       {/* Closing CTA */}
-      <section className="border-t border-smoke bg-charcoal py-24 text-center">
+      <section className="bg-ink py-20 text-center text-porcelain md:py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <h2 className="font-display text-3xl text-balance text-porcelain md:text-4xl">
+          <h2 className="font-display text-3xl text-balance md:text-4xl">
             The next chapter is always under construction.
           </h2>
           <Link
             href="/contact"
-            className="mt-8 inline-flex items-center gap-2 bg-gold px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold-soft"
+            className="group mt-9 inline-flex items-center gap-2 rounded-full bg-porcelain px-9 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold"
           >
-            Build with me <ArrowRight className="h-4 w-4" />
+            Build with me
+            <ArrowRight
+              aria-hidden="true"
+              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+            />
           </Link>
         </div>
       </section>

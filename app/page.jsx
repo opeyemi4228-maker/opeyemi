@@ -12,8 +12,12 @@ import AboutPreview from "@/components/home/AboutPreview";
 import Stats from "@/components/home/Stats";
 import VenturesShowcase from "@/components/home/VenturesShowcase";
 import InsightsPreview from "@/components/home/InsightsPreview";
-import HighlightsBento from "@/components/home/HighlightsBento";
+import Proof from "@/components/home/Proof";
 import CTA from "@/components/home/CTA";
+
+// Home opens on black, so the mobile browser chrome should too — the
+// root layout's white is right for every other route.
+export const viewport = { themeColor: "#000000" };
 
 export default function HomePage() {
   return (
@@ -23,7 +27,7 @@ export default function HomePage() {
       <Stats />
       <VenturesShowcase />
       <InsightsPreview />
-      <HighlightsBento />
+      <Proof />
       <CTA />
     </>
   );

@@ -10,7 +10,7 @@ import { siteConfig } from "@/data/site";
 const topics = ["Partnership", "Speaking", "Mentorship", "Press", "Other"];
 
 const fieldClasses =
-  "w-full border border-smoke bg-charcoal px-5 py-3.5 text-sm text-porcelain placeholder:text-fog/60 focus:border-gold focus:outline-none";
+  "w-full border border-hairline bg-paper px-5 py-3.5 text-sm text-ink placeholder:text-slate/70 focus:border-ink focus:outline-none";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -98,9 +98,13 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="inline-flex items-center gap-2 bg-gold px-9 py-4 text-xs font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-gold-soft"
+        className="group inline-flex items-center gap-2 rounded-full bg-ink px-9 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-paper transition-colors hover:bg-gold-ink"
       >
-        Send Enquiry <ArrowRight className="h-4 w-4" />
+        Send Enquiry
+        <ArrowRight
+          aria-hidden="true"
+          className="h-4 w-4 transition-transform group-hover:translate-x-1"
+        />
       </button>
     </form>
   );
