@@ -1,0 +1,101 @@
+// Opeyemi T. Ojurongbe — site database.
+//
+// Small on purpose. The public site stays static; the database holds only
+// what visitors send in (enquiries, newsletter sign-ups) and what the owner
+// needs to read them (one admin account, its sessions, a rate-limit ledger).
+//
+// `prisma-client-js` rather than the newer `prisma-client` generator: this is
+// a JavaScript project with no TypeScript build step, and the legacy generator
+// emits plain JS that both Next and the `node` CLI scripts can import.
+// The connection URL lives in prisma.config.mjs (Prisma 7 moved it there).
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────────────────────── visitors
+
+enum MessageStatus {
+  NEW // arrived, not opened
+  READ // opened in the dashboard
+  REPLIED // answered (marked by hand after replying from email)
+  ARCHIVED // done with, kept for the record
+}
+
+// An enquiry from the contact form.
+model Message {
+  id        String        @id @default(cuid())
+  name      String        @db.VarChar(120)
+  email     String        @db.VarChar(254)
+  topic     String        @db.VarChar(40)
+  body      String        @db.Text
+  status    MessageStatus @default(NEW)
+  // Where it came from, so a page that converts can be told apart from one
+  // that does not. Path only, never a full URL with query string.
+  source    String?       @db.VarChar(200)
+  createdAt DateTime      @default(now())
+  readAt    DateTime?
+  repliedAt DateTime?
+
+  @@index([status, createdAt])
+  @@index([createdAt])
+}
+
+enum SubscriberStatus {
+  ACTIVE
+  UNSUBSCRIBED
+}
+
+// A newsletter sign-up. Email is stored lower-cased, so it is unique as typed.
+model Subscriber {
+  id             String           @id @default(cuid())
+  email          String           @unique @db.VarChar(254)
+  status         SubscriberStatus @default(ACTIVE)
+  source         String?          @db.VarChar(200)
+  createdAt      DateTime         @default(now())
+  unsubscribedAt DateTime?
+
+  @@index([status, createdAt])
+}
+
+// ──────────────────────────────────────────────────────────────── owner
+
+model AdminUser {
+  id           String         @id @default(cuid())
+  email        String         @unique @db.VarChar(254)
+  name         String         @db.VarChar(120)
+  // scrypt, self-describing: "scrypt$N$r$p$salt$hash". See lib/auth/password.mjs.
+  passwordHash String         @db.VarChar(255)
+  createdAt    DateTime       @default(now())
+  lastLoginAt  DateTime?
+  sessions     AdminSession[]
+}
+
+// One row per signed-in browser. The cookie holds a random token; only its
+// SHA-256 is stored, so a leaked database cannot be replayed as a login.
+model AdminSession {
+  id         String    @id @default(cuid())
+  tokenHash  String    @unique @db.Char(64)
+  userId     String
+  user       AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userAgent  String?   @db.VarChar(300)
+  createdAt  DateTime  @default(now())
+  lastSeenAt DateTime  @default(now())
+  expiresAt  DateTime
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// Fixed-window counters, keyed by action + hashed client address. Lives in
+// Postgres rather than memory because serverless instances do not share RAM.
+model RateLimit {
+  key         String   @id @db.VarChar(120)
+  count       Int
+  windowStart DateTime
+}

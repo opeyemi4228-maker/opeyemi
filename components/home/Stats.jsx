@@ -10,7 +10,7 @@ import { stats } from "@/data/stats";
 
 export default function Stats() {
   return (
-    <section className="border-y border-hairline bg-alabaster py-16 sm:py-20 md:py-24">
+    <section className="border-y border-hairline bg-alabaster py-16 sm:py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <dl className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (

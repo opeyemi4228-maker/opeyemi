@@ -8,7 +8,7 @@
 // `fallback` the caller passes, so a surface that already shows the address
 // can offer something else instead of repeating it.
 
-import { FaXTwitter, FaInstagram, FaYoutube, FaLinkedinIn, FaFacebookF } from "react-icons/fa6";
+import { FaXTwitter, FaInstagram, FaYoutube, FaLinkedinIn, FaFacebookF, FaTiktok } from "react-icons/fa6";
 import { Mail } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
@@ -18,6 +18,7 @@ const icons = [
   { key: "twitter", label: "X (Twitter)", Icon: FaXTwitter },
   { key: "instagram", label: "Instagram", Icon: FaInstagram },
   { key: "youtube", label: "YouTube", Icon: FaYoutube },
+  { key: "tiktok", label: "TikTok", Icon: FaTiktok },
   { key: "facebook", label: "Facebook", Icon: FaFacebookF },
 ];
 

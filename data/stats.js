@@ -26,6 +26,6 @@ export const stats = [
     value: "3",
     suffix: "",
     label: "Disciplines, one standard",
-    detail: "Design engineering, geotechnics, leadership",
+    detail: "Mining, design and finance engineering",
   },
 ];

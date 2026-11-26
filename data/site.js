@@ -7,10 +7,19 @@ export const siteConfig = {
   shortName: "OTO",
   wordmark: "Opeyemi T. Ojurongbe",
 
-  // Three concrete credentials, not adjectives. Used as the hero eyebrow.
-  tagline: "Design Engineer · Registered Mining Engineer (NSE) · Founder, BitLayerX",
+  // The three disciplines, in the order the career happened. Hero eyebrow.
+  tagline: "Mining Engineer · Design Engineer · Finance Engineer",
 
-  role: "Founder & CEO, BitLayerX Technologies",
+  // What he leads. `roles` feeds lists; `role` reads as one line.
+  roles: [
+    "Founder & CEO, BitLayerX Technologies",
+    "CEO, Orangé Finance",
+    "Founder & President, JETSUP Community",
+  ],
+  role: "Founder & CEO, BitLayerX Technologies · CEO, Orangé Finance · Founder & President, JETSUP Community",
+
+  // The one-line answer to "Who is Opeyemi?".
+  who: "An engineer, a CEO and a leader.",
 
   // The thread that makes three disciplines one discipline.
   creed:
@@ -21,9 +30,9 @@ export const siteConfig = {
     "I design and build the products and systems organisations run on. Previously underground; now mostly on screens. The discipline is the same.",
 
   // SEO: a topic searcher should find this, not just someone typing the name.
-  title: "Opeyemi T. Ojurongbe, Design Engineer & Founder, BitLayerX",
+  title: "Opeyemi T. Ojurongbe | Mining, Design & Finance Engineer",
   description:
-    "Design engineer and registered mining engineer. I build the products and systems organisations run on, and write about how.",
+    "Mining engineer, design engineer and finance engineer. CEO of BitLayerX Technologies and Orangé Finance. I build the products, systems and financial structures organisations run on.",
 
   email: "thisisopeyemi24@gmail.com",
   location: "Abuja, Nigeria",
@@ -35,6 +44,7 @@ export const siteConfig = {
     twitter: "",
     instagram: "",
     youtube: "",
+    tiktok: "",
     facebook: "",
   },
 };

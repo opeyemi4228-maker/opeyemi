@@ -5,7 +5,7 @@ export const ventures = [
   {
     slug: "bitlayerx-technologies",
     name: "BitLayerX Technologies",
-    role: "Founder & CEO",
+    role: "CEO",
     summary:
       "A digital solutions enterprise accelerating business digitalisation across Nigeria and international markets. End to end product delivery, from UI/UX design and full stack development to deployment, brand strategy, and business process automation.",
     image: "/images/ventures/bitlayerx.jpg",
@@ -30,11 +30,11 @@ export const ventures = [
     url: "",
   },
   {
-    slug: "leadership-mentorship",
-    name: "Leadership & Mentorship",
+    slug: "leadership",
+    name: "Leadership",
     role: "Former National Vice President, NUESA",
     summary:
-      "A record of national student governance, from financial stewardship to national vice presidency of Nigeria's university engineering students, now channelled into mentoring young engineers and founders.",
+      "A record of national student governance, from financial stewardship to national vice presidency of Nigeria's university engineering students.",
     image: "/images/ventures/leadership.jpg",
     url: "",
   },

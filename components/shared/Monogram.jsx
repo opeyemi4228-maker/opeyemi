@@ -1,9 +1,11 @@
-// The mark. A drawn seal rather than a logo file, so it stays crisp at any
+import { LogoMark } from "@/components/shared/Logo";
+
+// The seal. A drawn seal rather than a logo file, so it stays crisp at any
 // size and inherits the page's colour.
 //
 // The Obama Library footer closes on an institutional emblem beside its
 // statement of record; this is the same move for a personal site — circular
-// legend, double rule, initials at the centre.
+// legend, double rule, the brand mark at the centre.
 
 export default function Monogram({ className = "", title = "Opeyemi T. Ojurongbe" }) {
   return (
@@ -29,7 +31,7 @@ export default function Monogram({ className = "", title = "Opeyemi T. Ojurongbe
         letterSpacing="1.6"
         fontWeight="600"
         opacity="0.6"
-        fontFamily="var(--font-inter), sans-serif"
+        fontFamily="var(--font-montserrat), sans-serif"
       >
         <textPath href="#monogram-arc-top" startOffset="50%" textAnchor="middle">
           OPEYEMI T. OJURONGBE
@@ -37,35 +39,19 @@ export default function Monogram({ className = "", title = "Opeyemi T. Ojurongbe
       </text>
       <text
         fill="currentColor"
-        fontSize="7"
-        letterSpacing="2"
+        fontSize="5.8"
+        letterSpacing="1.15"
         fontWeight="600"
         opacity="0.45"
-        fontFamily="var(--font-inter), sans-serif"
+        fontFamily="var(--font-montserrat), sans-serif"
       >
         <textPath href="#monogram-arc-bottom" startOffset="50%" textAnchor="middle">
-          DESIGN ENGINEER
+          MINING · DESIGN · FINANCE
         </textPath>
       </text>
 
-      {/* Initials */}
-      <text
-        x="60"
-        y="60"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fill="currentColor"
-        fontSize="30"
-        fontWeight="600"
-        letterSpacing="1"
-        fontFamily="var(--font-archivo), sans-serif"
-      >
-        OTO
-      </text>
-
-      {/* Rules flanking the initials */}
-      <line x1="30" y1="60" x2="40" y2="60" stroke="currentColor" strokeWidth="1" opacity="0.35" />
-      <line x1="80" y1="60" x2="90" y2="60" stroke="currentColor" strokeWidth="1" opacity="0.35" />
+      {/* The brand mark at the centre of the seal */}
+      <LogoMark x="40" y="40" width="40" height="40" />
     </svg>
   );
 }

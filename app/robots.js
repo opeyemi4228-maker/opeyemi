@@ -1,8 +1,9 @@
-import { SITE_URL } from "./sitemap";
+import { SITE_URL } from "@/lib/seo";
 
 export default function robots() {
   return {
-    rules: [{ userAgent: "*", allow: "/" }],
+    rules: [{ userAgent: "*", allow: "/", disallow: ["/admin", "/api"] }],
     sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

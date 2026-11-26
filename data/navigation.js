@@ -7,6 +7,7 @@
 export const navLinks = [
   { label: "About", href: "/about" },
   { label: "Ventures", href: "/ventures" },
+  { label: "Words on Marble", href: "/words-on-marble" },
   { label: "Insights", href: "/insights" },
   { label: "Media", href: "/media" },
   { label: "Contact", href: "/contact" },
@@ -22,9 +23,10 @@ export const footerColumns = [
   {
     heading: "Work",
     links: [
-      { label: "BitLayerX Technologies", href: "/ventures" },
-      { label: "Engineering Practice", href: "/ventures" },
-      { label: "Leadership & Mentorship", href: "/ventures" },
+      { label: "BitLayerX Technologies", href: "/ventures/bitlayerx" },
+      { label: "Orangé Finance", href: "/ventures/orange-finance" },
+      { label: "JETSUP Community", href: "/ventures/jetsup" },
+      { label: "Engineering Practice", href: "/ventures#practice" },
       { label: "Speaker Kit", href: "/speaking" },
     ],
   },
@@ -34,7 +36,7 @@ export const footerColumns = [
       { label: "Get in Touch", href: "/contact" },
       { label: "Book a Talk", href: "/speaking" },
       { label: "Press & Media", href: "/media" },
-      { label: "Newsletter", href: "/insights#newsletter" },
+      { label: "Words on Marble", href: "/words-on-marble" },
     ],
   },
 ];

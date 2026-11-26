@@ -15,8 +15,13 @@
    `charcoal`, `smoke`, `fog` and `porcelain` must
    keep their original values.
 
-   Type: Inter (body), Archivo (display),
-   Newsreader (the editorial serif voice).
+   Type: Montserrat, and only Montserrat. Heavy
+   (800 to 900) and tight for display, wide-tracked
+   uppercase for labels, regular for reading.
+
+   Shape: generous radii (cards 24px, the hero
+   stage 28px, controls fully round), one gold
+   used boldly rather than everywhere.
    ============================================ */
 @theme {
   /* ---- Light scale — the default surface ---- */
@@ -38,33 +43,98 @@
   --color-gold-soft: #e6cf94;
 
   /* ---- Typefaces ---- */
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-display: var(--font-archivo), system-ui, sans-serif;
-  --font-editorial: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+  --font-display: var(--font-montserrat), system-ui, sans-serif;
+  /* `editorial` survives as a name only: it is Montserrat now, so any
+     leftover use renders in the brand face rather than a fallback serif. */
+  --font-editorial: var(--font-montserrat), system-ui, sans-serif;
+
+  /* ---- Motion ---- */
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-progress: progress var(--progress-duration, 7s) linear forwards;
+  /* Opening animations run in CSS, not JS, so they start on the first paint
+     instead of waiting for hydration: the name is never invisible while a
+     slow phone downloads scripts. */
+  --animate-rise: rise 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-up: fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes rise {
+    from {
+      transform: translateY(105%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hero-photo {
+    from {
+      opacity: 0;
+      transform: scale(1.08);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
 }
 
 /* ---------- Base ---------- */
 html {
   scroll-behavior: smooth;
-  /* The header is fixed; anchor targets must clear it. */
-  scroll-padding-top: 8rem;
+  /* The floating header is fixed; anchor targets must clear it (68px on
+     phones, 80px from tablet up) with room to breathe. */
+  scroll-padding-top: 6rem;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 7rem;
+  }
 }
 
 body {
   @apply bg-paper text-graphite antialiased;
   font-family: var(--font-sans);
-  /* Inter and Newsreader both carry an optical-size axis; letting the
-     browser drive it is what keeps small labels open and large settings
-     tight without a second font file. */
-  font-optical-sizing: auto;
 }
 
-/* Archivo's uppercase is drawn wide. At display sizes that generosity turns
+/* Montserrat's uppercase is drawn wide. At display sizes that generosity turns
    into gaps, so every large display setting pulls back a little. Applied on
-   the element rather than per-utility, so no heading can forget it. */
-:where(h1, h2) .font-display,
-:where(h1, h2).font-display {
-  letter-spacing: -0.015em;
+   the element rather than per-utility, so no heading can forget it.
+
+   It lives in the base layer on purpose. Unlayered, it outranked every
+   `tracking-*` utility, so a heading could never be set tighter than this. */
+@layer base {
+  :where(h1, h2) .font-display,
+  :where(h1, h2).font-display {
+    letter-spacing: -0.015em;
+  }
 }
 
 /* Visible keyboard focus everywhere. gold-ink is the one accent value that
@@ -97,6 +167,7 @@ body {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
@@ -108,13 +179,9 @@ body {
   text-wrap: balance;
 }
 
-/* The editorial serif voice — the creed, pull quotes, essay ledes. Newsreader
-   sets a touch large for its point size, so it is nudged back to sit level
-   with the grotesque around it. */
+/* Kept so existing markup keeps working; it is Montserrat now. */
 @utility editorial {
   font-family: var(--font-editorial);
-  font-optical-sizing: auto;
-  letter-spacing: -0.005em;
 }
 
 /* Tabular figures for anything that counts: stats, years, metrics. Stops
@@ -122,4 +189,19 @@ body {
 @utility numeric {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
+}
+
+/* A marquee track pauses while a pointer rests on it, so a phrase can be read. */
+@utility marquee-pause {
+  &:hover > * {
+    animation-play-state: paused;
+  }
+}
+
+/* Hides the scrollbar on horizontal card rails without disabling scroll. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

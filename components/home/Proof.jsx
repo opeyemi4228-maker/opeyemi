@@ -41,13 +41,13 @@ const proof = [
   },
   {
     Icon: Rocket,
-    name: "Founder & CEO, BitLayerX",
+    name: "CEO, BitLayerX",
     description:
       "Founded 2025. Digitalisation for businesses still running on paper, memory, and heroic effort.",
     href: "/ventures",
     cta: "See the work",
     image: "/images/ventures/bitlayerx.jpg",
-    alt: "Opeyemi T. Ojurongbe, Founder and CEO of BitLayerX Technologies",
+    alt: "Opeyemi T. Ojurongbe, CEO of BitLayerX Technologies",
   },
   {
     Icon: Landmark,
@@ -126,7 +126,7 @@ function ProofCard({ Icon, name, description, href, cta, image, alt, position, f
 
 export default function Proof() {
   return (
-    <section className="bg-paper py-20 md:py-28">
+    <section className="bg-paper py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading eyebrow="Verifiable" title="Awarded, Elected, Appointed" />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
