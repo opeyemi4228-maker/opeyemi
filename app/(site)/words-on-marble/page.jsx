@@ -1,22 +1,26 @@
-// Words on Marble: what it is, the latest edition, the three forms it
-// takes, where to find it, and how to receive it (email or WhatsApp).
+// Words on Marble, explained and read on the page itself: the latest
+// edition in full, as text; what Words on Marble is, in the questions a new
+// reader asks; every edition so far; where the videos and posts are; and
+// how to receive it (email or WhatsApp).
 // Content lives in data/wordsOnMarble.js; social links in data/site.js.
 
-import { FaYoutube, FaInstagram, FaTiktok, FaLinkedinIn } from "react-icons/fa6";
+import { FaYoutube, FaInstagram, FaTiktok, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 import PageHeader from "@/components/shared/PageHeader";
 import SectionHeading, { SectionLabel } from "@/components/shared/SectionHeading";
-import EditionTablet from "@/components/shared/EditionTablet";
 import Newsletter from "@/components/shared/Newsletter";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import PillLink from "@/components/ui/PillLink";
 import CTA from "@/components/home/CTA";
-import { wordsOnMarble } from "@/data/wordsOnMarble";
+import EditionBody from "@/components/words/EditionBody";
+import EditionList from "@/components/words/EditionList";
+import { wordsOnMarble, editionDate, editionRefs, whatsappHref } from "@/data/wordsOnMarble";
 import { siteConfig } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Words on Marble",
   description:
-    "Words on Marble is Opeyemi T. Ojurongbe's twice-weekly note on excellence, competence, wisdom and work: a newsletter by email and WhatsApp, with videos and posts on YouTube, Instagram, TikTok and LinkedIn.",
+    "Words on Marble is Opeyemi T. Ojurongbe's twice-weekly note on excellence, faith, wisdom and work: one principle, grounded in scripture, delivered by email and WhatsApp, with videos and posts on YouTube, Instagram, TikTok and LinkedIn.",
   path: "/words-on-marble",
 });
 
@@ -28,6 +32,7 @@ const platformMeta = {
 };
 
 export default function WordsOnMarblePage() {
+  const [latest, ...earlier] = wordsOnMarble.editions;
   const platforms = wordsOnMarble.platforms.map((key) => ({
     key,
     ...platformMeta[key],
@@ -37,67 +42,117 @@ export default function WordsOnMarblePage() {
   return (
     <>
       <PageHeader
-        eyebrow={`Newsletter · ${wordsOnMarble.cadence}`}
+        eyebrow={`${wordsOnMarble.cadence} · by ${wordsOnMarble.author}`}
         title="Words on Marble"
         description={wordsOnMarble.summary}
         facts={[
           { label: "How often", value: wordsOnMarble.cadence },
-          { label: "Forms", value: "Newsletter · Videos · Posts" },
+          { label: "Each edition", value: "One principle, about a minute" },
           { label: "Delivered by", value: "Email & WhatsApp" },
-          { label: "Written by", value: wordsOnMarble.author },
+          { label: "Also on", value: "YouTube · Instagram · TikTok · LinkedIn" },
         ]}
       />
 
-      {/* ---- The latest edition ---- */}
-      <section className="bg-paper pb-16 sm:pb-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-16 lg:px-8">
-          <div>
-            <SectionLabel index="01">Why marble</SectionLabel>
-            <h2 className="mt-6 font-display text-[clamp(2.25rem,4.6vw,3.75rem)] leading-[0.98] font-extrabold tracking-[-0.045em] text-ink">
-              Words worth <span className="text-gold-ink">carving.</span>
-            </h2>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-graphite">{wordsOnMarble.why}</p>
-            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-slate">
-              Here is a recent edition.
+      {/* ---- 01 The latest edition, in full ---- */}
+      <section className="bg-paper pb-16 sm:pb-20 md:pb-24">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16 lg:px-8">
+          <aside className="lg:sticky lg:top-32 lg:self-start">
+            <SectionLabel index="01">Latest edition</SectionLabel>
+            <dl className="mt-8 hidden space-y-5 lg:block">
+              {editionDate(latest) && (
+                <div>
+                  <dt className="text-[10px] font-bold tracking-[0.22em] text-slate uppercase">Published</dt>
+                  <dd className="mt-1.5 text-[15px] font-semibold text-ink">{editionDate(latest)}</dd>
+                </div>
+              )}
+              <div>
+                <dt className="text-[10px] font-bold tracking-[0.22em] text-slate uppercase">Scripture</dt>
+                <dd className="mt-1.5 space-y-1 text-[15px] font-semibold text-ink">
+                  {editionRefs(latest).map((r) => (
+                    <span key={r} className="block">
+                      {r}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            </dl>
+            <div className="mt-10 hidden flex-col items-start gap-4 lg:flex">
+              <PillLink href="#subscribe" tone="gold">
+                Receive it twice a week
+              </PillLink>
+              <a
+                href={whatsappHref()}
+                {...(wordsOnMarble.whatsapp ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="inline-flex items-center gap-2 border-b border-ink/20 pb-1 text-sm font-semibold text-ink transition-colors hover:border-gold-ink hover:text-gold-ink"
+              >
+                <FaWhatsapp aria-hidden="true" className="size-4 text-[#25D366]" />
+                Or join on WhatsApp
+              </a>
+            </div>
+          </aside>
+
+          <article className="max-w-2xl">
+            <p className="text-[11px] font-bold tracking-[0.2em] text-gold-ink uppercase lg:hidden">
+              {[editionDate(latest), ...editionRefs(latest)].filter(Boolean).join(" · ")}
             </p>
-          </div>
-          <ScrollReveal>
-            <EditionTablet />
-          </ScrollReveal>
+            <h2 className="mt-4 font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[0.98] font-black tracking-[-0.045em] text-ink lg:mt-0">
+              {latest.title}
+            </h2>
+            <div className="mt-10">
+              <EditionBody edition={latest} />
+            </div>
+            <div className="mt-10 flex flex-wrap gap-3 lg:hidden">
+              <PillLink href="#subscribe" tone="gold">
+                Receive it twice a week
+              </PillLink>
+            </div>
+          </article>
         </div>
       </section>
 
-      {/* ---- Three forms ---- */}
-      <section className="border-y border-hairline bg-alabaster py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading index="02" eyebrow="Three forms" title="One idea," accent="three ways in." />
-          <div className="grid gap-5 md:grid-cols-3">
-            {wordsOnMarble.formats.map((f, i) => (
-              <ScrollReveal key={f.title} delay={i * 0.07} className="h-full">
-                <article className="flex h-full flex-col rounded-3xl border border-hairline bg-paper p-7">
-                  <span className="numeric font-display text-5xl leading-none font-extralight tracking-tighter text-gold-ink">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-8 font-display text-xl font-extrabold tracking-[-0.02em] text-ink">{f.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate">{f.body}</p>
-                </article>
+      {/* ---- 02 What it is ---- */}
+      <section className="border-y border-hairline bg-alabaster py-16 sm:py-20 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16 lg:px-8">
+          <div>
+            <SectionLabel index="02">About Words on Marble</SectionLabel>
+            <h2 className="mt-6 font-display text-[clamp(2.25rem,4.6vw,3.5rem)] leading-[0.98] font-extrabold tracking-[-0.045em] text-ink">
+              What it is, <span className="text-gold-ink">and why.</span>
+            </h2>
+          </div>
+          <dl className="divide-y divide-hairline border-y border-hairline">
+            {wordsOnMarble.faq.map((item, i) => (
+              <ScrollReveal key={item.q} delay={i * 0.04}>
+                <div className="grid gap-2 py-7 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-10">
+                  <dt className="font-display text-lg leading-snug font-extrabold tracking-[-0.02em] text-ink">{item.q}</dt>
+                  <dd className="text-[16px] leading-relaxed text-graphite">{item.a}</dd>
+                </div>
               </ScrollReveal>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
-      {/* ---- Where to find it ---- */}
-      <section className="bg-paper py-16 sm:py-20">
+      {/* ---- 03 Every edition ---- */}
+      {earlier.length > 0 && (
+        <section className="bg-paper py-16 sm:py-20 md:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading index="03" eyebrow="The archive" title="Earlier" accent="editions." />
+            <EditionList editions={earlier} />
+          </div>
+        </section>
+      )}
+
+      {/* ---- 04 Videos and posts ---- */}
+      <section className={`bg-paper pb-16 sm:pb-20 ${earlier.length > 0 ? "" : "pt-16 sm:pt-20"}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            index="03"
-            eyebrow="On every platform"
-            title="Videos and posts,"
-            accent="everywhere you are."
-            intro="The newsletter arrives in your inbox or on WhatsApp. The videos and posts go out across every social platform."
+            index="04"
+            eyebrow="Videos and posts"
+            title="The same ideas,"
+            accent="spoken."
+            intro="Each principle is also published as a short video and a post, so it reaches you wherever you are."
           />
-          <ul className="grid gap-px overflow-hidden rounded-3xl border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-px overflow-hidden rounded-3xl border border-hairline bg-hairline grid-cols-2 lg:grid-cols-4">
             {platforms.map(({ key, label, Icon, what, url }) => {
               const body = (
                 <>
@@ -111,11 +166,11 @@ export default function WordsOnMarblePage() {
               return (
                 <li key={key} className="bg-paper">
                   {url ? (
-                    <a href={url} target="_blank" rel="noopener noreferrer" className="group block p-7 transition-colors hover:bg-alabaster">
+                    <a href={url} target="_blank" rel="noopener noreferrer" className="group block p-6 transition-colors hover:bg-alabaster sm:p-7">
                       {body}
                     </a>
                   ) : (
-                    <div className="group block p-7">{body}</div>
+                    <div className="group block p-6 sm:p-7">{body}</div>
                   )}
                 </li>
               );
@@ -137,7 +192,10 @@ export default function WordsOnMarblePage() {
         body="Write in with a question for a future edition, a story of excellence worth telling, or an invitation to speak."
         primary={{ label: "Write to Opeyemi", href: "/contact" }}
         secondary={{ label: "Who is Opeyemi?", href: "/about" }}
+        tone="light"
+        showEmail={false}
       />
     </>
   );
 }
+

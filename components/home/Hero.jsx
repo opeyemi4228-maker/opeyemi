@@ -24,6 +24,12 @@ import OrgMark from "@/components/shared/OrgMark";
 const after = (s) => ({ animationDelay: `calc(var(--intro, 0s) + ${s}s)` });
 
 const rail = [
+  {
+    href: "/about",
+    role: "Registered",
+    name: "Mining Engineer",
+    color: "var(--color-porcelain)",
+  },
   ...organisations.map((o) => ({
     org: o,
     href: `/ventures/${o.slug}`,
@@ -104,8 +110,8 @@ export default function Hero() {
             className="mt-5 max-w-2xl animate-fade-up text-base leading-relaxed text-porcelain/75 sm:mt-6 sm:text-lg lg:text-xl"
             style={after(0.45)}
           >
-            A registered engineer who builds companies, systems and the next
-            generation of leaders.
+            Registered engineer. Founder and CEO of BitLayerX Technologies.
+            Author of Words on Marble.
           </p>
 
           <div
@@ -126,24 +132,19 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ---- What he leads ---- */}
+      {/* ---- Engineer · CEO · Leader, each a door ---- */}
       <nav
-        aria-label="What Opeyemi leads"
+        aria-label="Who Opeyemi is"
         className="relative animate-fade-up border-t border-porcelain/10 bg-ink/50 backdrop-blur-md"
         style={after(0.75)}
       >
-        <ul className="mx-auto grid max-w-7xl grid-cols-2 lg:grid-cols-4">
+        <ul className="mx-auto grid max-w-7xl grid-cols-3">
           {rail.map((item, i) => (
             <li
               key={item.href}
-              className={[
-                "border-porcelain/10",
-                i % 2 === 1 ? "border-l" : "",
-                i >= 2 ? "border-t lg:border-t-0" : "",
-                i === 2 ? "lg:border-l" : "",
-              ].join(" ")}
+              className={i > 0 ? "border-l border-porcelain/10" : undefined}
             >
-              <Link href={item.href} className="group relative block h-full px-4 py-4 sm:px-6 sm:py-5 lg:px-8 lg:py-6">
+              <Link href={item.href} className="group relative block h-full px-3 py-4 sm:px-6 sm:py-5 lg:px-8 lg:py-6">
                 <span
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
@@ -155,16 +156,16 @@ export default function Hero() {
                   </span>
                   <ArrowUpRight
                     aria-hidden="true"
-                    className="size-4 shrink-0 text-porcelain/40 transition-[transform,color] duration-300 group-hover:rotate-45 group-hover:text-gold"
+                    className="hidden size-4 shrink-0 text-porcelain/40 sm:block transition-[transform,color] duration-300 group-hover:rotate-45 group-hover:text-gold"
                   />
                 </span>
-                <span className="mt-2 flex items-center gap-2.5">
+                <span className="mt-2 flex items-center gap-2 sm:gap-2.5">
                   {item.org?.logo ? (
                     <OrgMark org={item.org} className="size-6" />
                   ) : (
                     <span aria-hidden="true" className="size-2 shrink-0 rounded-full" style={{ background: item.color }} />
                   )}
-                  <span className="font-display text-base leading-tight font-extrabold tracking-[-0.02em] sm:text-xl">
+                  <span className="font-display text-[15px] leading-tight font-extrabold tracking-[-0.02em] sm:text-xl">
                     {item.name}
                   </span>
                 </span>

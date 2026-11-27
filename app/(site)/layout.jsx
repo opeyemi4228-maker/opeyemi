@@ -30,8 +30,6 @@ function structuredData() {
     },
     worksFor: [
       { "@type": "Organization", name: "BitLayerX Technologies" },
-      { "@type": "Organization", name: "Orangé Finance" },
-      { "@type": "Organization", name: "JETSUP Community" },
     ],
     alumniOf: {
       "@type": "CollegeOrUniversity",

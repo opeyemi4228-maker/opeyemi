@@ -18,7 +18,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Contact",
   description:
-    "Partnerships, speaking, and press enquiries for Opeyemi T. Ojurongbe, CEO of BitLayerX Technologies and Orangé Finance. Direct email, no gatekeeping.",
+    "Partnerships, speaking, and press enquiries for Opeyemi T. Ojurongbe, Founder and CEO of BitLayerX Technologies. Direct email, no gatekeeping.",
   path: "/contact",
 });
 
@@ -38,7 +38,7 @@ const channels = [
   {
     Icon: Landmark,
     title: "Finance",
-    detail: "Orangé Finance, and finance engineering for organisations that need their money to be as well built as their systems.",
+    detail: "Finance engineering for organisations that need their money to be as well built as their systems.",
     action: { label: "Use the form", href: "#enquiry" },
   },
   {

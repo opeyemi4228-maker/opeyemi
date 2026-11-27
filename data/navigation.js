@@ -24,8 +24,6 @@ export const footerColumns = [
     heading: "Work",
     links: [
       { label: "BitLayerX Technologies", href: "/ventures/bitlayerx" },
-      { label: "Orangé Finance", href: "/ventures/orange-finance" },
-      { label: "JETSUP Community", href: "/ventures/jetsup" },
       { label: "Engineering Practice", href: "/ventures#practice" },
       { label: "Speaker Kit", href: "/speaking" },
     ],

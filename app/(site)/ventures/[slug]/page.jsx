@@ -25,6 +25,9 @@ import { organisations, organisationBySlug } from "@/data/organisations";
 import { pageMetadata } from "@/lib/seo";
 import OrgMark from "@/components/shared/OrgMark";
 
+// Only the organisations that are live get a page; any other slug is a 404.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return organisations.map((o) => ({ slug: o.slug }));
 }
@@ -209,7 +212,8 @@ export default async function OrganisationPage({ params }) {
         </div>
       </section>
 
-      {/* ---- The others ---- */}
+      {/* ---- The others (only when there are others) ---- */}
+      {others.length > 0 && (
       <section className="border-t border-hairline bg-alabaster py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionLabel index="04">Also led by Opeyemi</SectionLabel>
@@ -220,6 +224,7 @@ export default async function OrganisationPage({ params }) {
           </div>
         </div>
       </section>
+      )}
 
       <CTA
         title={`Work with`}

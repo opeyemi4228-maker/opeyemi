@@ -23,7 +23,7 @@ export const metadata = pageMetadata({
 
 const facts = [
   { label: "Name", value: siteConfig.name },
-  { label: "Title", value: "CEO, BitLayerX Technologies · CEO, Orangé Finance" },
+  { label: "Title", value: "Founder & CEO, BitLayerX Technologies" },
   { label: "Credential", value: "Registered Mining Engineer (NSE)" },
   { label: "Based in", value: siteConfig.location },
 ];

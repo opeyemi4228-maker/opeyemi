@@ -24,7 +24,7 @@ const LAST_UPDATED = "July 2026";
 const entries = [
   {
     heading: "Building",
-    body: "Leading BitLayerX Technologies and Orangé Finance as CEO. At BitLayerX the work is end to end: understanding how a business actually runs, designing the interface, building the system, and handing it over so it keeps working without me in the room.",
+    body: "Leading BitLayerX Technologies as Founder and CEO. At BitLayerX the work is end to end: understanding how a business actually runs, designing the interface, building the system, and handing it over so it keeps working without me in the room.",
   },
   {
     heading: "Practising",
@@ -36,7 +36,7 @@ const entries = [
   },
   {
     heading: "Open to",
-    body: "Digitalisation projects, finance and product partnerships, and speaking invitations.",
+    body: "Digitalisation projects, product partnerships and speaking invitations.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function NowPage() {
         facts={[
           { label: "Last updated", value: LAST_UPDATED },
           { label: "Based", value: siteConfig.location },
-          { label: "Leading", value: "BitLayerX · Orangé Finance" },
+          { label: "Leading", value: "BitLayerX Technologies" },
           { label: "Open to", value: "Projects & partnerships" },
         ]}
       />

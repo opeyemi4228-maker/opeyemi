@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Media",
   description:
-    "Photography, appearances and the stories behind them. Press-ready images of Opeyemi T. Ojurongbe, CEO of BitLayerX Technologies and Orangé Finance.",
+    "Photography, appearances and the stories behind them. Press-ready images of Opeyemi T. Ojurongbe, Founder and CEO of BitLayerX Technologies.",
   path: "/media",
 });
 

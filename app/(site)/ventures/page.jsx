@@ -1,5 +1,5 @@
-// Ventures. First the three organisations he leads (BitLayerX, Orangé
-// Finance, JETSUP Community), each in its own colour with the one-line
+// Ventures. First the company he leads (BitLayerX Technologies), in its
+// own colour with the one-line
 // answer to "what is it?" and a door to its own page. Then the practice and
 // the record behind them, each given a full chapter with the story behind
 // its photograph.
@@ -11,7 +11,7 @@ import ImageReveal from "@/components/ui/ImageReveal";
 import PillLink from "@/components/ui/PillLink";
 import CTA from "@/components/home/CTA";
 import SectionHeading from "@/components/shared/SectionHeading";
-import { BrandPanel } from "@/components/home/VenturesShowcase";
+import { OrgFeature } from "@/components/home/VenturesShowcase";
 import { organisations } from "@/data/organisations";
 import { ventures } from "@/data/ventures";
 import { pageMetadata } from "@/lib/seo";
@@ -19,7 +19,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Ventures",
   description:
-    "What Opeyemi T. Ojurongbe leads: BitLayerX Technologies, Orangé Finance and JETSUP Community, with the engineering practice, R-Zone Enterprises and the national leadership record behind them.",
+    "What Opeyemi T. Ojurongbe leads: BitLayerX Technologies, with the engineering practice, R-Zone Enterprises and the national leadership record behind them.",
   path: "/ventures",
 });
 
@@ -45,28 +45,23 @@ export default function VenturesPage() {
       <PageHeader
         eyebrow="Ventures"
         title="Building What Matters"
-        description="Two companies and a movement, and the engineering practice and leadership record underneath them."
+        description="BitLayerX Technologies, and the engineering practice and leadership record underneath it."
         facts={[
           { label: "BitLayerX Technologies", value: "Founder & CEO" },
-          { label: "Orangé Finance", value: "CEO" },
-          { label: "JETSUP Community", value: "Founder & President" },
+          { label: "Founded", value: "2025" },
+          { label: "Words on Marble", value: "Author" },
           { label: "Practice", value: "Registered Mining Engineer" },
         ]}
       />
 
-      {/* ---- The three organisations ---- */}
+      {/* ---- The company ---- */}
       <section className="bg-paper pb-16 sm:pb-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-5 lg:grid-cols-3">
-            {organisations.map((org, i) => (
-              <ScrollReveal key={org.slug} delay={i * 0.08} className="h-full">
-                <div className="flex h-full flex-col gap-5">
-                  <BrandPanel org={org} index={i} className="min-h-[24rem]" />
-                  <p className="px-1 text-[15px] leading-relaxed text-slate">{org.summary}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+        <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
+          {organisations.map((org) => (
+            <ScrollReveal key={org.slug}>
+              <OrgFeature org={org} />
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
@@ -77,7 +72,7 @@ export default function VenturesPage() {
             eyebrow="Underneath"
             title="The practice"
             accent="and the record."
-            intro="The engineering, media and leadership work that the organisations stand on."
+            intro="The engineering, media and leadership work that the company stands on."
           />
         </div>
         <div className="mx-auto max-w-7xl space-y-16 px-4 sm:px-6 md:space-y-24 lg:px-8">
@@ -145,7 +140,7 @@ export default function VenturesPage() {
       <CTA
         title="The next chapter"
         accent="is under construction."
-        body="Digitalisation projects, product builds, finance partnerships and new ventures. If you are building something that has to last, start here."
+        body="Digitalisation projects, product builds and new ventures. If you are building something that has to last, start here."
         primary={{ label: "Build with me", href: "/contact" }}
         secondary={{ label: "Read the story", href: "/about" }}
       />

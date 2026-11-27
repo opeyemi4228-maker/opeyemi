@@ -3,6 +3,7 @@
 // NEXT_PUBLIC_SITE_URL (see lib/seo.js). /admin is deliberately absent.
 
 import { insights } from "@/data/insights";
+import { wordsOnMarble } from "@/data/wordsOnMarble";
 import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap() {
@@ -13,8 +14,6 @@ export default function sitemap() {
     { path: "/about", priority: 0.9, changeFrequency: "monthly" },
     { path: "/ventures", priority: 0.9, changeFrequency: "monthly" },
     { path: "/ventures/bitlayerx", priority: 0.85, changeFrequency: "monthly" },
-    { path: "/ventures/orange-finance", priority: 0.85, changeFrequency: "monthly" },
-    { path: "/ventures/jetsup", priority: 0.85, changeFrequency: "monthly" },
     { path: "/words-on-marble", priority: 0.9, changeFrequency: "weekly" },
     { path: "/insights", priority: 0.9, changeFrequency: "weekly" },
     { path: "/speaking", priority: 0.8, changeFrequency: "monthly" },
@@ -43,5 +42,12 @@ export default function sitemap() {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...essays];
+  const editions = wordsOnMarble.editions.map((e) => ({
+    url: `${SITE_URL}/words-on-marble/${e.slug}`,
+    lastModified: e.date ? new Date(e.date) : now,
+    changeFrequency: "yearly",
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...essays, ...editions];
 }

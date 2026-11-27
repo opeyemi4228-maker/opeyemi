@@ -82,8 +82,7 @@ export default function Footer() {
             This is the personal website of{" "}
             <span className="text-ink">{siteConfig.name}</span>, a registered
             engineer with the Nigerian Society of Engineers, Founder and CEO of
-            BitLayerX Technologies, CEO of Orangé Finance and Founder and President
-            of JETSUP Community. Views published here are his own. They are
+            BitLayerX Technologies and author of Words on Marble. Views published here are his own. They are
             not the positions of any employer, client, or professional body he
             is associated with, and nothing here is professional engineering
             advice.

@@ -68,7 +68,7 @@ export default async function OpengraphImage() {
           </div>
 
           <div style={{ display: "flex", fontSize: 16, letterSpacing: 2, color: "#a1a1aa", textTransform: "uppercase" }}>
-            CEO, BitLayerX Technologies · CEO, Orangé Finance
+            Founder & CEO, BitLayerX Technologies · Words on Marble
           </div>
         </div>
 

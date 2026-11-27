@@ -34,7 +34,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "About",
   description:
-    "The story of Opeyemi T. Ojurongbe: mining engineer, design engineer and finance engineer, from geotechnical fieldwork to leading BitLayerX Technologies and Orangé Finance.",
+    "The story of Opeyemi T. Ojurongbe: mining engineer, design engineer and finance engineer, from geotechnical fieldwork to leading BitLayerX Technologies.",
   path: "/about",
 });
 
@@ -90,11 +90,11 @@ export default function AboutPage() {
         eyebrow="About"
         title="Who is Opeyemi"
         mark="?"
-        description="An engineer, a CEO and a leader. Registered mining engineer; Founder & CEO of BitLayerX Technologies; CEO of Orangé Finance; Founder & President of JETSUP Community; author of Words on Marble. A leader shaped by stewardship, and a builder shaped by the ground itself."
+        description="An engineer, a CEO and a leader. Registered mining engineer; Founder & CEO of BitLayerX Technologies; author of Words on Marble. A leader shaped by stewardship, and a builder shaped by the ground itself."
         facts={[
           { label: "Credential", value: "Registered Engineer, NSE" },
           { label: "Education", value: "B.Eng. Mining, FUTA" },
-          { label: "Leading", value: "BitLayerX · Orangé · JetsUp" },
+          { label: "Leading", value: "BitLayerX Technologies" },
           { label: "Based", value: siteConfig.location },
         ]}
       />
@@ -152,8 +152,7 @@ export default function AboutPage() {
               <p>
                 <span className="font-semibold text-ink">Opeyemi Titus Ojurongbe</span> is a
                 registered mining engineer with the Nigerian Society of Engineers, a design
-                engineer, and a finance engineer: CEO of BitLayerX Technologies and CEO of Orangé
-                Finance. His career runs on a single conviction: the disciplines that keep a mine
+                engineer, and a finance engineer: Founder and CEO of BitLayerX Technologies. His career runs on a single conviction: the disciplines that keep a mine
                 safe (measurement, standards, accountability) are the same disciplines that make
                 products people trust, money people can account for, and leadership people
                 believe in.
@@ -172,18 +171,15 @@ export default function AboutPage() {
                 stewardship across university, state, and national platforms.
               </p>
               <p>
-                Today he leads two companies and a movement. As CEO of BitLayerX Technologies, which
-                he founded, he runs end to end product delivery across UI/UX design, full stack
-                development, deployment, and business process automation, accelerating business
-                digitalisation across Nigeria and international markets. As CEO of Orangé Finance, he
-                brings the same engineering discipline to money. As Founder and President of JETSUP
-                Community, he is raising Africa&apos;s young problem-solvers, from every school, every
-                village and every street.
+                Today he leads BitLayerX Technologies, which he founded in 2025. As CEO he runs end
+                to end product delivery across strategy, UI/UX design, full stack development,
+                deployment and business process automation, accelerating business digitalisation
+                across Nigeria and international markets.
               </p>
               <p>
                 Twice a week he writes <span className="font-semibold text-ink">Words on Marble</span>,
                 a short note on excellence, competence and wisdom, delivered by email and WhatsApp and
-                published as videos and posts across every social platform.
+                published as videos and posts on YouTube, Instagram, TikTok and LinkedIn.
               </p>
             </div>
           </div>

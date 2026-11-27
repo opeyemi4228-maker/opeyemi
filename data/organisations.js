@@ -1,4 +1,4 @@
-// The three organisations Opeyemi leads, each answering "What is it?".
+// The organisations Opeyemi leads, each answering "What is it?".
 //
 // Every description is taken from the organisation's own site and
 // documents (BitLayerX's site metadata, Orangé Finance's README and FAQ,
@@ -13,7 +13,7 @@
 // `url` stays empty until the organisation's site is live; the pages then
 // show a "Visit" link automatically.
 
-export const organisations = [
+const allOrganisations = [
   {
     slug: "bitlayerx",
     name: "BitLayerX Technologies",
@@ -45,6 +45,7 @@ export const organisations = [
   },
   {
     slug: "orange-finance",
+    paused: true,
     name: "Orangé Finance",
     short: "Orangé Finance",
     role: "CEO",
@@ -74,6 +75,7 @@ export const organisations = [
   },
   {
     slug: "jetsup",
+    paused: true,
     name: "JETSUP Community",
     short: "JetsUp",
     role: "Founder & President",
@@ -104,5 +106,9 @@ export const organisations = [
     url: "",
   },
 ];
+
+// Paused organisations keep their facts here but appear nowhere on the site
+// (no cards, no pages, no links) until `paused` is removed.
+export const organisations = allOrganisations.filter((o) => !o.paused);
 
 export const organisationBySlug = (slug) => organisations.find((o) => o.slug === slug);

@@ -13,10 +13,9 @@ export const siteConfig = {
   // What he leads. `roles` feeds lists; `role` reads as one line.
   roles: [
     "Founder & CEO, BitLayerX Technologies",
-    "CEO, Orangé Finance",
-    "Founder & President, JETSUP Community",
+    "Author, Words on Marble",
   ],
-  role: "Founder & CEO, BitLayerX Technologies · CEO, Orangé Finance · Founder & President, JETSUP Community",
+  role: "Founder & CEO, BitLayerX Technologies",
 
   // The one-line answer to "Who is Opeyemi?".
   who: "An engineer, a CEO and a leader.",
@@ -32,7 +31,7 @@ export const siteConfig = {
   // SEO: a topic searcher should find this, not just someone typing the name.
   title: "Opeyemi T. Ojurongbe | Mining, Design & Finance Engineer",
   description:
-    "Mining engineer, design engineer and finance engineer. CEO of BitLayerX Technologies and Orangé Finance. I build the products, systems and financial structures organisations run on.",
+    "Mining engineer, design engineer and finance engineer. Founder and CEO of BitLayerX Technologies. He builds the products, systems and brands organisations run on.",
 
   email: "thisisopeyemi24@gmail.com",
   location: "Abuja, Nigeria",
