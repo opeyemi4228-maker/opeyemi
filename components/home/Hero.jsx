@@ -61,13 +61,13 @@ export default function Hero() {
           Desktop: it holds the right 60% of the frame beside the type. */}
       <div className="relative -z-10 h-[58svh] min-h-[340px] w-full shrink-0 sm:h-[62svh] lg:absolute lg:inset-y-0 lg:right-0 lg:left-auto lg:h-auto lg:w-[60%]">
         <Image
-          src="/images/ventures/bitlayerx.jpg"
+          src="/images/portraits/hero-thinking.jpg"
           alt={`${siteConfig.name}, engineer, CEO and leader`}
           fill
           priority
           quality={90}
           sizes="(min-width: 1024px) 60vw, 100vw"
-          className="animate-[hero-photo_1.8s_cubic-bezier(0.22,1,0.36,1)_both] object-cover object-[50%_12%] grayscale contrast-[1.08] lg:object-[50%_18%]"
+          className="animate-[hero-photo_1.8s_cubic-bezier(0.22,1,0.36,1)_both] object-cover object-[60%_20%] grayscale contrast-[1.05] lg:object-[50%_12%]"
           style={after(0)}
         />
         <div
